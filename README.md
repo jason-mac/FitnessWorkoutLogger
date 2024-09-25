@@ -1,5 +1,5 @@
 # Workout Logger Application 
-This project is a workout logging application designed to help users easily track and analyze their gym routines. The application will allow users to log their workouts, including exercises, sets, reps, and weights used. Additionally, users will be able to track their strength progress over time and identify trends in their performance. 
+This project is a workout logging application designed to help users easily track and analyze their gym routines. The application will allow users to log their workouts, including exercises, sets, reps, and weights used. Additionally, users will have access to other useful features such as being able to create different weekly workout plans for any given week.
 
 ## Who Is This Application For
 The app is tailored for **anyone** who enjoys working out—whether they’re seasoned gym-goers or beginners looking to stay organized and improve their routines.
