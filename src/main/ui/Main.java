@@ -10,10 +10,12 @@ public class Main {
 
     public void testScanner() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.next(null);
+        System.out.println("yo what u trynna do");
+        String input = scanner.nextLine();
+        System.out.println("i am doing: " + input);
     }
-    // Functions expressing the functionality
 
+    // Functions expressing the functionality 
     public void logWorkout(WorkoutLog log, Workout workout) {
         log.logWorkout(workout);
     }
@@ -41,10 +43,50 @@ public class Main {
         weeklyRoutine.getWorkoutForDay(day).display();
     }
 
+    public void mainMenu() {
+        String input = null;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    public Day getDay() {
+        String input;
+        Day toReturn = null;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What Day?");
+        System.out.println("Monday (0)");
+        System.out.println("Tuesday (1)");
+        System.out.println("Wednesday (2)");
+        input = scanner.nextLine();
+        if(input.equals("0")) {
+            toReturn = Day.MONDAY;
+        }
+
+        if(input.equals("1")) {
+            toReturn = Day.TUESDAY;
+        }
+        
+        if(input.equals("2")) {
+            toReturn = Day.WEDNESDAY;
+        }
+
+        scanner.close();
+        return toReturn;
+    }
+
     public static void main(String[] args) throws Exception {
         Main main = new Main();
 
-        //main.makeWeeklyRoutine();
+        main.testScanner();
+        Day myDay = main.getDay();
 
         // user should be able to make as many weekly routines as they like stored in some collection
         ArrayList<WeeklyRoutine> weeklyRoutines = new ArrayList<>();
