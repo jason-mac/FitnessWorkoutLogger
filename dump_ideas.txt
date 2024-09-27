@@ -1,0 +1,23 @@
+## Core Feature 
+A user will be able to plan their next week's workout in advance and during the workouts they will only need to input the amount of sets, reps, and weights used for a workout. For example, a user's planned workout may look like:
+## Monday Workout
+- Lat Pulldown
+- Bench-Assisted Barbell Rows
+- Dumbbell Bicep Curl
+- Cable Rope Hammer Curls
+- Machine Crunch
+
+For each exercise, users can add multiple sets. A set will log the amount of reps, the weight used, and *optionally* rest time between sets. For example: 
+
+### Lat Pulldown
+- **Set One**
+    - Weight: 100lbs
+    - Reps: 10
+    - Restime: N/A
+- **Set Two**
+    - Weight: 110lbs
+    - Reps: 8
+    - Rest Time: 60 second
+
+The app will also include a conversion feature between pounds and kilograms, enabling users to switch between metrics at any time for easier analysis of their progress.
+Users can receive valuable insights, such as total workout volume for each session and projected one-rep max estimates for key lifts like squats, bench press, and deadlifts based on the weight and reps they perform. Additionally, users will be able to track their strength progress over time and identify trends in their performance. 
