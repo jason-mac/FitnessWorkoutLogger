@@ -13,12 +13,13 @@ public class Set {
         POUNDS,
     }
     
+    // REQUIRES: weight > 0 and weight must be at most one decimal place
     // EFFECT: Creates a set with the current weight, repCount, and unit specified
     public Set(double weight, int repCount, Unit unit) {
         // stub
     }
 
-    // REQUIRES: weight > 0
+    // REQUIRES: weight > 0 and weight must be at most one decimal place
     // MODIFIES: this
     // EFFECT: changes the weight used in the set, with a unit specified
     public void setWeight (double weight, Unit unit) {
@@ -29,6 +30,11 @@ public class Set {
     // MODIFIES: this
     // EFFECT: changes the rep count in the set with repCount
     public void setRepCount(int repCount) {
+        // stub
+    }
+
+    // EFFECT: returns the set "volume", in other words returns weight * rep count with specified unit
+    public void getSetVolume(Unit unit) {
         // stub
     }
 
