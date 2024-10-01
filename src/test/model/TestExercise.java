@@ -56,7 +56,7 @@ public class TestExercise {
         assertEquals(1000.0, exercise.getVolume(Unit.POUNDS));
         Set setTwo = new Set(500.0, 5, Unit.POUNDS);
         exercise.addSet(setTwo);
-        assertEquals(12500.0, exercise.getVolume(Unit.POUNDS));
+        assertEquals(3500.0, exercise.getVolume(Unit.POUNDS));
     }
 
 
