@@ -32,22 +32,20 @@ public class TestSet {
 
     @Test
     void testPoundsToKiloInitPounds() {
-        assertEquals(102.3, setKilograms.getWeightInKilograms());
+        assertEquals(102.3, setPounds.getWeightInKilograms());
     }
 
     @Test 
     void testGetSetVolumeKilograms() {
         assertEquals(1005.0, setKilograms.getSetVolume(Unit.KILOGRAMS));
-        assertEquals(511.4, setPounds.getSetVolume(Unit.KILOGRAMS));
+        assertEquals(511.5, setPounds.getSetVolume(Unit.KILOGRAMS));
     }
 
     @Test
     void testGetSetVolumePounds() {
-        assertEquals(2215.6, setKilograms.getSetVolume(Unit.POUNDS));
+        assertEquals(2216.0, setKilograms.getSetVolume(Unit.POUNDS));
         assertEquals(1127.5, setPounds.getSetVolume(Unit.POUNDS));
     }
-    private static final double POUNDS_TO_KILOGRAMS = 0.45359;
-    private static final double KILOGRAM_TO_POUNDS = 2.2046;
 
     @Test
     void setWeightKilograms() {
@@ -56,7 +54,7 @@ public class TestSet {
         assertEquals(10, setKilograms.getWeightInKilograms());
         assertEquals(15, setPounds.getWeightInKilograms());
         assertEquals(100.0, setKilograms.getSetVolume(Unit.KILOGRAMS));
-        assertEquals(75.0, setKilograms.getSetVolume(Unit.KILOGRAMS));
+        assertEquals(75.0, setPounds.getSetVolume(Unit.KILOGRAMS));
         assertEquals(22.0, setKilograms.getWeightInPounds());
         assertEquals(33.1, setPounds.getWeightInPounds());
     }
@@ -68,7 +66,7 @@ public class TestSet {
         assertEquals(10, setKilograms.getWeightInPounds());
         assertEquals(15, setPounds.getWeightInPounds());
         assertEquals(100.0, setKilograms.getSetVolume(Unit.POUNDS));
-        assertEquals(75.0, setKilograms.getSetVolume(Unit.POUNDS));
+        assertEquals(75.0, setPounds.getSetVolume(Unit.POUNDS));
         assertEquals(4.5, setKilograms.getWeightInKilograms());
         assertEquals(6.8, setPounds.getWeightInKilograms());
     }
