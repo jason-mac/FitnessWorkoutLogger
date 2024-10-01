@@ -44,9 +44,9 @@ public class Set {
     }
 
     // EFFECT: returns the set "volume", in other words returns weight * rep count with specified unit
-    public double getSetVolume(Unit unit) {
+    public double getSetVolume(Unit u) {
         double volume;
-        if(unit == Unit.KILOGRAMS) {
+        if (u == Unit.KILOGRAMS) {
             volume = this.getWeightInKilograms() * this.repCount;
         } else {
             volume = this.getWeightInPounds() * this.repCount;
@@ -57,7 +57,7 @@ public class Set {
 
     // EFFECT: returns the weight used in the set in kilograms
     public double getWeightInKilograms() {
-        if(this.unit == Unit.KILOGRAMS) {
+        if (this.unit == Unit.KILOGRAMS) {
             return this.weight;
         }
 
@@ -67,7 +67,7 @@ public class Set {
 
     // EFFECT: returns the weight used in the set in pounds 
     public double getWeightInPounds() {
-        if(this.unit == Unit.POUNDS) {
+        if (this.unit == Unit.POUNDS) {
             return this.weight;
         }
 
@@ -80,6 +80,6 @@ public class Set {
     }
 
     private double oneDecimal(double value) {
-        return Math.round(value * 10) / 10.0;
+        return Math.round(value * 10.0) / 10.0;
     }
 }
