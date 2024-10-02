@@ -40,7 +40,8 @@ public class TestExercise {
 
     @Test 
     void testGetVolumeNoSets() {
-        assertEquals(0.0, exercise.getVolume(null));
+        assertEquals(0.0, exercise.getVolume(Unit.KILOGRAMS));
+        assertEquals(0.0, exercise.getVolume(Unit.POUNDS));
     }
 
     @Test
