@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.Set.Unit;
+
 public class TestWeeklyRoutine {
     static final Day monday = Day.MONDAY;
     WeeklyRoutine routine;
@@ -101,6 +103,46 @@ public class TestWeeklyRoutine {
         assertEquals(getTwo.getName(), workout.getName());
     }
 
+    @Test 
+    void testGetVolumeEmpty() {
+        assertEquals(0.0, routine.getVolume(Unit.KILOGRAMS));
+    }
+
+    @Test 
+    void testGetVolumeNonEmptyMult() {
+        Set one = new Set(10.0, 4, Unit.KILOGRAMS);
+        Set two = new Set(15.5, 5, Unit.KILOGRAMS);
+        Set three = new Set(5.2, 9, Unit.POUNDS);
+        Set four = new Set(20.0, 3, Unit.POUNDS);
+
+        Exercise ExOne = new Exercise("");
+        Exercise ExTwo = new Exercise("");
+
+        ExOne.addSet(one);
+        ExOne.addSet(two);
+        ExTwo.addSet(three);
+        ExTwo.addSet(four);
+
+        Workout workoutTwo = createWorkout();
+
+        workout.addExercise(ExOne);
+        workoutTwo.addExercise(ExTwo);
+
+        routine.addWorkout(workout, monday);
+        routine.addWorkout(workoutTwo, Day.TUESDAY);
+
+        double exOneVolumeKG = one.getSetVolume(Unit.KILOGRAMS) + two.getSetVolume(Unit.KILOGRAMS);
+        double exTwoVolumeKG = three.getSetVolume(Unit.KILOGRAMS) + four.getSetVolume(Unit.KILOGRAMS);
+
+        double exOneVolumeLBS = one.getSetVolume(Unit.POUNDS) + two.getSetVolume(Unit.POUNDS);
+        double exTwoVolumeLBS = three.getSetVolume(Unit.POUNDS) + four.getSetVolume(Unit.POUNDS);
+        
+        double weeklyRoutineVolumeKG = exOneVolumeKG + exTwoVolumeKG;
+        double weeklyRoutineVolumeLBS = exOneVolumeLBS + exTwoVolumeLBS;
+
+        assertEquals(weeklyRoutineVolumeKG, routine.getVolume(Unit.KILOGRAMS));
+        assertEquals(weeklyRoutineVolumeLBS, routine.getVolume(Unit.POUNDS));
+    }
     private Workout createWorkout() {
         return new Workout();
     }
