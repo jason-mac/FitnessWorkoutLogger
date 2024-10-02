@@ -15,8 +15,8 @@ public class TestWorkout {
     Set set;
 
     @BeforeEach 
-    void setup() {
-        workout = new Workout();
+    void setup() {    
+        workout = new Workout("Upper");
         exercise = new Exercise("Bench Press");
         set = new Set(10.0, 5, Unit.KILOGRAMS);
         exercise.addSet(set);
@@ -25,6 +25,7 @@ public class TestWorkout {
     @Test
     void testConstructor() {
         assertEquals(0, workout.getNumberOfExercises());
+        assertEquals("Upper", workout.getName());
     }
 
     @Test
@@ -73,11 +74,18 @@ public class TestWorkout {
     }
 
     @Test
-    void testReplaceExerciseEmptyList() {
-        workout.replaceExercise(0, exercise);
+    void testReplaceExerciseEmptyListAndOutOfBounds() {
+        assertFalse(workout.replaceExercise(0, exercise));
         assertEquals(0, workout.getNumberOfExercises());
         assertEquals(null, workout.getExerciseByIndex(0));
         assertEquals(null, workout.getExerciseByName(exercise.getName()));
+    }
+
+    @Test 
+    void testGetExerciseByIndexNonEmptyOutOfBounds() {
+        workout.addExercise(exercise);
+        Exercise getWorkout = workout.getExerciseByIndex(2);
+        assertEquals(null, getWorkout);
     }
 
     @Test
@@ -88,10 +96,21 @@ public class TestWorkout {
     }
 
     @Test
-    void testReplaceExerciseNonEmptyList() {
+    void testReplaceExerciseNonEmptyListInBounds() {
         Exercise exercise2 = makeExercise("Lat Pull Down");
         workout.addExercise(exercise);
         workout.replaceExercise(0, exercise2);
+        assertEquals(1, workout.getNumberOfExercises());
+        assertEquals("Lat Pull Down", workout.getExerciseByIndex(0).getName());
+        assertEquals(null, workout.getExerciseByName(exercise.getName()));
+    }
+
+    @Test
+    void testReplaceExerciseNonEmptyListOutOfBounds() {
+        Exercise exercise2 = makeExercise("Lat Pull Down");
+        workout.addExercise(exercise);
+        assertFalse(workout.replaceExercise(-1, exercise2));
+        assertTrue(workout.replaceExercise(0, exercise2));
         assertEquals(1, workout.getNumberOfExercises());
         assertEquals("Lat Pull Down", workout.getExerciseByIndex(0).getName());
         assertEquals(null, workout.getExerciseByName(exercise.getName()));
@@ -149,6 +168,15 @@ public class TestWorkout {
     }
 
     @Test
+    void removeExerciseEmptyListOutOfBOundsNonEmpty() {
+        workout.addExercise(exercise);
+        workout.removeExercise(-1);
+        assertEquals(1, workout.getNumberOfExercises());
+        workout.removeExercise(1);
+        assertEquals(1, workout.getNumberOfExercises());
+    }
+
+    @Test
     void removeExerciseNonEmptyFail() {
         workout.addExercise(exercise);
         assertFalse(workout.removeExercise(1));
@@ -176,6 +204,16 @@ public class TestWorkout {
         assertEquals(null, getExercise);
     }
 
+    @Test
+    void testIsEmptyActuallyEmpty() {
+        assertTrue(workout.isEmpty());
+    }
+
+    @Test
+    void testIsEmptyNotEmpty() {
+        workout.addExercise(exercise);
+        assertFalse(workout.isEmpty());
+    }
     Exercise makeExercise(String name) {
         return new Exercise(name);
     }
