@@ -10,15 +10,10 @@ public class Workout {
     ArrayList<Exercise> exercises;
     String name;
     
-    // EFFECTS: Construct a workout with no exercises, sets name to empty string 
-    public Workout() {
-        this.name = "";
-        this.exercises = new ArrayList<>();
-    }
 
     // EFFECTS: Construct a workout with no exercises and sets name to given name 
     public Workout(String name) {
-        this.name = null;
+        this.name = name;
         this.exercises = new ArrayList<>();
     }
 
@@ -33,7 +28,7 @@ public class Workout {
     // EFFECTS: removes the given exercise from list of exercises in workout at index and returns true
     //          if the index is out of bounds or list is empty, do nothing and return false
     public boolean removeExercise(int index) {
-        if (outOfBounds(index) || exercises.isEmpty()) {
+        if (exercises.isEmpty() || outOfBounds(index)) {
             return false;
         }
         exercises.remove(index);
@@ -44,7 +39,7 @@ public class Workout {
     // EFFECTS: replaces the exercie in the list at the specified index with given exercise, and return true
     //          if the index is out of bounds or list is empty, do nothing and return false
     public boolean replaceExercise(int index, Exercise exercise) {
-        if (outOfBounds(index) || exercises.isEmpty()) {
+        if (exercises.isEmpty() || outOfBounds(index)) {
             return false;
         }
         exercises.set(index, exercise);
@@ -54,7 +49,7 @@ public class Workout {
     // EFFECTS: returns the given exercise at index from list of exercises in workout
     //          returns null if index is out of bounds or list is empty
     public Exercise getExerciseByIndex(int index) {
-        if (outOfBounds(index) || exercises.isEmpty()) {
+        if (exercises.isEmpty() || outOfBounds(index)) {
             return null;
         }
         return exercises.get(index);
