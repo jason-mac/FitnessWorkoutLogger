@@ -59,14 +59,4 @@ public class TestExercise {
         exercise.addSet(setTwo);
         assertEquals(3500.0, exercise.getVolume(Unit.POUNDS));
     }
-
-
-    void createSetsAndAddToExercise() {
-        Set set1 = new Set(50, 12, Unit.POUNDS);
-        Set set2 = new Set(60, 10, Unit.POUNDS);
-        Set set3 = new Set(70, 8,  Unit.POUNDS);
-        exercise.addSet(set1);
-        exercise.addSet(set2);
-        exercise.addSet(set3);
-    }
 }
