@@ -115,18 +115,18 @@ public class TestWeeklyRoutine {
         Set three = new Set(5.2, 9, Unit.POUNDS);
         Set four = new Set(20.0, 3, Unit.POUNDS);
 
-        Exercise ExOne = new Exercise("");
-        Exercise ExTwo = new Exercise("");
+        Exercise exOne = new Exercise("");
+        Exercise exTwo = new Exercise("");
 
-        ExOne.addSet(one);
-        ExOne.addSet(two);
-        ExTwo.addSet(three);
-        ExTwo.addSet(four);
+        exOne.addSet(one);
+        exOne.addSet(two);
+        exTwo.addSet(three);
+        exTwo.addSet(four);
 
         Workout workoutTwo = createWorkout();
 
-        workout.addExercise(ExOne);
-        workoutTwo.addExercise(ExTwo);
+        workout.addExercise(exOne);
+        workoutTwo.addExercise(exTwo);
 
         routine.addWorkout(workout, monday);
         routine.addWorkout(workoutTwo, Day.TUESDAY);
@@ -143,6 +143,7 @@ public class TestWeeklyRoutine {
         assertEquals(weeklyRoutineVolumeKG, routine.getVolume(Unit.KILOGRAMS));
         assertEquals(weeklyRoutineVolumeLBS, routine.getVolume(Unit.POUNDS));
     }
+
     private Workout createWorkout() {
         return new Workout();
     }

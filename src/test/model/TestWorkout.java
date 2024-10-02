@@ -76,7 +76,7 @@ public class TestWorkout {
     void testReplaceExerciseEmptyList() {
         workout.replaceExercise(0, exercise);
         assertEquals(0, workout.getNumberOfExercises());
-        assertEquals("Lat Pull Down", workout.getExerciseByIndex(0).getName());
+        assertEquals(null, workout.getExerciseByIndex(0));
         assertEquals(null, workout.getExerciseByName(exercise.getName()));
     }
 
