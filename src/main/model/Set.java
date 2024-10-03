@@ -2,7 +2,9 @@ package model;
 
 import java.lang.Math;
 
-// Class that models a a single set of an exercise in a workout
+// Class that models a a single set of an exercise in a workout, storing information on weights used
+// rep count and a specified unit
+// offers conversion between kilograms and pounds
 public class Set {
 
     // Conversion factors
@@ -21,14 +23,14 @@ public class Set {
     private Unit unit;
     
     // REQUIRES: weight > 0 and weight must be at most one decimal place and repCount > 0
-    // EFFECT: Creates a set with the current weight, repCount, and unit specified
+    // EFFECT: Creates a set with the weight, rep count, and unit specified
     public Set(double weight, int repCount, Unit unit) {
         this.weight = weight;
         this.repCount = repCount;
         this.unit = unit;
     }
 
-    // REQUIRES: weight > 0 and weight must be at most one decimal place
+    // REQUIRES: weight > 0.0 and weight must be exactly one decimal place
     // MODIFIES: this
     // EFFECT: changes the weight used in the set, with a unit specified
     public void setWeight(double weight, Unit unit) {
@@ -62,7 +64,7 @@ public class Set {
         }
 
         double weightInKilograms = this.weight * POUNDS_TO_KILOGRAMS;
-        return oneDecimal(weightInKilograms); // stub
+        return oneDecimal(weightInKilograms); 
     }
 
     // EFFECT: returns the weight used in the set in pounds 
@@ -79,6 +81,7 @@ public class Set {
         return this.repCount;
     }
 
+    // EFFECTS: returns the given value back in one decimal place only 
     private double oneDecimal(double value) {
         return Math.round(value * 10.0) / 10.0;
     }
