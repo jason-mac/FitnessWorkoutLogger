@@ -220,6 +220,7 @@ public class TestWorkout {
         workout.setName("John Cena");
         assertEquals("John Cena", workout.getName());
     }
+
     Exercise makeExercise(String name) {
         return new Exercise(name);
     }
