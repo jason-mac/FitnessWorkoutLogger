@@ -36,6 +36,12 @@ public class Exercise {
         return sets.size();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets name of workout to given name
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
