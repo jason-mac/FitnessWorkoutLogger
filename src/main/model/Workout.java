@@ -97,6 +97,10 @@ public class Workout {
         return exercises.size();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // EFFECTS: returns if true the index is out of bounds of exercises array
     private boolean outOfBounds(int index) {
         return (index < 0 || index >= exercises.size());

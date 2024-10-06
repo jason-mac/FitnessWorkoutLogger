@@ -214,6 +214,12 @@ public class TestWorkout {
         workout.addExercise(exercise);
         assertFalse(workout.isEmpty());
     }
+
+    @Test
+    void testSetName() {
+        workout.setName("John Cena");
+        assertEquals("John Cena", workout.getName());
+    }
     Exercise makeExercise(String name) {
         return new Exercise(name);
     }
