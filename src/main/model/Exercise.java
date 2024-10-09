@@ -18,7 +18,7 @@ public class Exercise {
 
     // MODIFIES: this
     // EFFECT: adds a set to the list of sets for this exercise
-    public void  addSet(Set set) {
+    public void addSet(Set set) {
         sets.add(set);
     }
 
@@ -34,6 +34,11 @@ public class Exercise {
     // EFFECT: Returns the amount of sets were perfoemd with this exercise
     public int getSetCount() {
         return sets.size();
+    }
+
+    // EFFECT: returns list of set
+    public ArrayList<Set> getSets() {
+        return this.sets;
     }
 
     // MODIFIES: this
