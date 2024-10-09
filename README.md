@@ -14,4 +14,5 @@ I chose this project because I frequent the gym myself, but I've often found it 
 
 - As a user, I want to create and save multiple workout plans for the week (e.g., Push-Pull-Legs or Upper-Lower splits) so that I can organize and switch up my training effectively.
 
-- As a user, I want to be able to view the workout volume for any logged workout.
+- As a user, I want to be able to view the workout volume for any logged workout and also view the planned weekly workout volume for any stored weekly workout plan
+
