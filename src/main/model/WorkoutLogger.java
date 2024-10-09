@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
 
 // Class that is able to store, and retrieve workouts given a date. 
 public class WorkoutLogger {
@@ -14,8 +15,30 @@ public class WorkoutLogger {
     // REQUIRES: date is int the format dd/mm/year
     // MODIFIES: this
     // EFFECTS: adds a workout at given date into the collection
+    //          over rides the workout if there is already one at the given date
     public void addWorkout(String date, Workout workout) {
         this.workoutLogs.put(date, workout);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes a workout at the given date
+    //          if no workout at date, does nothing
+    public void removeWorkout(String date) {
+        //stub
+    }
+
+
+    // MODIGIES: this
+    // EFFECTS: clears the entire workout logs
+    public void clearLogs() {
+        //stub
+    }
+
+
+
+    // EFFECTS: returns a list of dates to which a workout has been stored
+    List<String> getDates() {
+        return this.workoutLogs.keySet();
     }
 
     // EFFECTS: retrieves the workout at given date,
