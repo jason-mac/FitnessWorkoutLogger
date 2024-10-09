@@ -45,6 +45,10 @@ public class SavedRoutines {
         this.savedRoutines.clear();
     }
 
+    public boolean isEmpty() {
+        return this.savedRoutines.size() == 0;
+    }
+
     public int getNumRoutinesStored() {
         return this.savedRoutines.size();
     }
