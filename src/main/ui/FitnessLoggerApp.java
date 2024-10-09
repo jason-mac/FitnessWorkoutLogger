@@ -80,8 +80,15 @@ public class FitnessLoggerApp {
             return;
         }
 
-        System.out.println("Which date would you like to view your logged workout (dd/mm/year): ");
-        String date = input.nextLine();
+        System.out.println("Which date would you like to remove a workout from (type in 'list' for possible dates): ");
+        String userInput = input.nextLine();
+        if (userInput.equals("list")) {
+            for (String date : this.workoutLogs.getDates()) {
+                System.out.println("\t-" + date);
+            }
+            userInput = input.nextLine();
+        }
+        String date = userInput;
 
         Workout workout = workoutLogs.getWorkout(date);
         if (workout == null) {
@@ -272,11 +279,10 @@ public class FitnessLoggerApp {
     }
 
     private void displayRoutine(WeeklyRoutine routine) {
-        System.out.println("Which unit would you like to planned routine in (kg or lbs): ");
+        System.out.println("Which unit would you like to see planned routine in (kg or lbs): ");
         String userInput = input.nextLine();
         Unit unit = userInput.equals("kg") ? Unit.KILOGRAMS : Unit.POUNDS;
-        System.out.println("Information for routine " + routine.getName());
-
+        System.out.println("Information for routine '" + routine.getName() + "'");
         for (Days day: Days.values()) {
             Workout workout = routine.getWorkout(day);
             if (workout == null) {
@@ -294,6 +300,7 @@ public class FitnessLoggerApp {
                 System.out.println();
             }
         }
+        System.out.println("Weekly volume for this routine is " + routine.getVolume(unit) + " in " + unit);
     }
 
     private Exercise createExercise() {
