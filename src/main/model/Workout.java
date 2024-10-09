@@ -1,14 +1,12 @@
 package model;
 
 import model.Set.Unit;
-
-
 import java.util.ArrayList;
 
-// Class that models a workout, which stores a list of exercises 
+// Class that models a workout, which stores a list of exercises and has a name
 public class Workout {
-    ArrayList<Exercise> exercises;
-    String name;
+    private ArrayList<Exercise> exercises;
+    private String name;
     
 
     // EFFECTS: Construct a workout with no exercises and sets name to given name 
@@ -74,7 +72,7 @@ public class Workout {
         this.exercises.clear();
     }
 
-    // EFFECTS: Return total workout volume in specified unit
+    // EFFECTS: Return total workout volume in given unit
     public double getVolume(Unit unit) {
         double toReturn = 0;
         for (Exercise exercise : exercises) {
@@ -92,7 +90,6 @@ public class Workout {
         return this.exercises.size() == 0;
     }
 
-    // EFFECTS: return number of exercises in the workout
     public int getNumberOfExercises() {
         return exercises.size();
     }
