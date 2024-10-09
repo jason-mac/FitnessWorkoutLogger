@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,12 +53,16 @@ public class TestWorkout {
     @Test
     void testClearExercisesNoExercises() {
         workout.clearExercises();
+        ArrayList<Exercise> exercises = workout.getExercises();
+        assertEquals(exercises.size(), 0);
         assertTrue(workout.isEmpty());
     }
 
     @Test
     void testClearExercisesOneExercises() {
         workout.addExercise(exercise);
+        ArrayList<Exercise> exercises = workout.getExercises();
+        assertEquals(exercise ,exercises.get(0));
         assertEquals(1, workout.getNumberOfExercises());    
         workout.clearExercises();
         assertTrue(workout.isEmpty());
@@ -68,6 +73,9 @@ public class TestWorkout {
         Exercise exercise2 = makeExercise("Lat Pull Down"); 
         workout.addExercise(exercise);
         workout.addExercise(exercise2);
+        ArrayList<Exercise> exercises = workout.getExercises();
+        assertEquals(exercise ,exercises.get(0));
+        assertEquals(exercise2 ,exercises.get(1));
         assertEquals(2, workout.getNumberOfExercises());    
         workout.clearExercises();
         assertTrue(workout.isEmpty());
