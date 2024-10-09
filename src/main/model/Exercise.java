@@ -3,13 +3,12 @@ package model;
 import model.Set.Unit;
 import java.util.ArrayList;
 
-// Stores information of the amount of sets done in a given exercise
+// Represents an exercise done with a name and a list of sets to be stored associated with the exercise
 public class Exercise {
 
-    private String name;
-    private ArrayList<Set> sets; 
+    private String name;            // name of exercise
+    private ArrayList<Set> sets;    // list of sets to be stored
 
-    // REQRUIRES: non-empty name
     // EFFECTS: creaates an exercise with given name and no sets initially done
     public Exercise(String name) {
         this.name = name;
@@ -31,18 +30,15 @@ public class Exercise {
         return volume;
     }
 
-    // EFFECT: Returns the amount of sets were perfoemd with this exercise
+    // EFFECT: Returns the amount of sets were performed with this exercise
     public int getSetCount() {
         return sets.size();
     }
 
-    // EFFECT: returns list of set
     public ArrayList<Set> getSets() {
         return this.sets;
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets name of workout to given name
     public void setName(String name) {
         this.name = name;
     }
