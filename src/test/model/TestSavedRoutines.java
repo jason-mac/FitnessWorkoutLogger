@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,14 @@ public class TestSavedRoutines {
     @Test
     void testConstructor() {
         assertEquals(0, routines.getNumRoutinesStored());
-
+        assertTrue(this.routines.isEmpty());
     }
 
     @Test 
     void testAddOneRoutine() {
         this.routines.addRoutine(routine);
         assertEquals(1, this.routines.getNumRoutinesStored());
+        assertFalse(this.routines.isEmpty());
         assertEquals(routine, this.routines.getRoutineByName(routine.getName()));
         ArrayList<WeeklyRoutine> getRoutines = this.routines.getRoutines();
         assertEquals(routine, getRoutines.get(0));
