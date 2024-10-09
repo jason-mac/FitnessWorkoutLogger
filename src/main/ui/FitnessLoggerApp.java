@@ -119,7 +119,7 @@ public class FitnessLoggerApp {
         }
 
         if (workoutLogs.getWorkout(userInput) == null) {
-            System.out.println("Sorry, not logged workout at that date");
+            System.out.println("Sorry, no logged workout at that date");
             return;
         }
 
