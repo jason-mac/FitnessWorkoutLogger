@@ -8,7 +8,7 @@ import model.Set.Unit;
 // interpreted as a rest day
 public class WeeklyRoutine {
     String name;
-    HashMap<Day, Workout> routine;
+    HashMap<Days, Workout> routine;
 
     // EFFECTS: Creates a weekly routine with no workouts initially
     //          sets the weekly routine name to given name
@@ -20,14 +20,14 @@ public class WeeklyRoutine {
     // MODIFIES: this
     // EFFECTS: Adds a workout into the collection corresponding to the given day
     //          If a workout is already in the slot of day, it overrides it
-    public void addWorkout(Workout workout, Day day) {
+    public void addWorkout(Workout workout, Days day) {
         routine.put(day, workout);
     }
 
     // MODIFIES: this
     // EFFECTS: removes the workout at given day
     //          if there is no workout, do nothing
-    public void removeWorkout(Day day) {
+    public void removeWorkout(Days day) {
         routine.remove(day);
     }
 
@@ -58,14 +58,14 @@ public class WeeklyRoutine {
 
     // EFFECTS: returns the workout at the given day
     //          returns null if there is no workout at given day
-    public Workout getWorkout(Day day) {
+    public Workout getWorkout(Days day) {
         return routine.get(day);
     }
 
     // REQUIRES: dayOne != dayTwo
     // MODIFIES: this
     // EFFECTS: swaps the workouts at given days
-    public void swapWorkouts(Day dayOne, Day dayTwo) {
+    public void swapWorkouts(Days dayOne, Days dayTwo) {
         Workout temp = routine.get(dayOne);
         routine.put(dayOne, routine.get(dayTwo));
         routine.put(dayTwo, temp);
