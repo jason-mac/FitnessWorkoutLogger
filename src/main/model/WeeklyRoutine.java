@@ -4,8 +4,7 @@ import java.util.HashMap;
 
 import model.Set.Unit;
 
-// Class modifying a workout weekly routine, a null workout on a day is
-// interpreted as a rest day
+// Class modelling a workout weekly routine storing a name and can store a workout for each day of the week
 public class WeeklyRoutine {
     String name;
     HashMap<Days, Workout> routine;
@@ -17,6 +16,7 @@ public class WeeklyRoutine {
         routine = new HashMap<>();
     }
 
+    // REQUIRES: workout is not already in the routine
     // MODIFIES: this
     // EFFECTS: Adds a workout into the collection corresponding to the given day
     //          If a workout is already in the slot of day, it overrides it
@@ -31,23 +31,16 @@ public class WeeklyRoutine {
         routine.remove(day);
     }
 
-    // EFFECTS: returns number of workouts in the weekly routine
+    // EFFECTS: returns number of workouts in the weekly routine (Max is 7)
     public int getNumWorkouts() {
         return routine.size();
     }
 
-
-    // EFFECTS: returns number of rest days in the weekly routine
-    public int getNumRestDays() {
-        return 7 - getNumWorkouts();
-    }
-
-    // EFFECTS: returns name of weekly routine
     public String getName() {
         return this.name;
     }
 
-    // EFFECTS: returns the total weekly workout volume
+    // EFFECTS: returns the total weekly workout volume 
     public double getVolume(Unit unit) {
         double toReturn = 0;
         for(Workout workout : routine.values()) {
@@ -72,7 +65,7 @@ public class WeeklyRoutine {
     }
 
     // MODIFIES: this
-    // EFFECTS: resets the routine and sets each day workout to "REST DAY"
+    // EFFECTS: clears the entire workout routine
     public void clearRoutine() {
         routine.clear();
     }
