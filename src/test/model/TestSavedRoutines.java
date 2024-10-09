@@ -74,4 +74,17 @@ public class TestSavedRoutines {
         assertEquals(0, routines.getNumRoutinesStored());
 
     }
+
+    @Test void getWeeklyRoutineByNameNoMatch() {
+        routines.addRoutine(routine);
+        assertEquals(null, routines.getRoutineByName("John"));
+    }
+
+    @Test void getWeeklyRoutineByNameMatch() {
+        WeeklyRoutine routineTwo = new WeeklyRoutine("Hello");
+        routines.addRoutine(routine);
+        routines.addRoutine(routineTwo);
+        assertEquals(routine, routines.getRoutineByName("Upper"));
+        assertEquals(routineTwo, routines.getRoutineByName(routineTwo.getName()));
+    }
 }
