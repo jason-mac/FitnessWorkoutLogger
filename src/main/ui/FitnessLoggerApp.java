@@ -272,17 +272,26 @@ public class FitnessLoggerApp {
     }
 
     private void displayRoutine(WeeklyRoutine routine) {
+        System.out.println("Which unit would you like to planned routine in (kg or lbs): ");
+        String userInput = input.nextLine();
+        Unit unit = userInput.equals("kg") ? Unit.KILOGRAMS : Unit.POUNDS;
         System.out.println("Information for routine " + routine.getName());
+
         for (Days day: Days.values()) {
             Workout workout = routine.getWorkout(day);
             if (workout == null) {
                 continue;
             }
-            System.out.println("Displaying data for workout " + routine.getWorkout(day).getName() + " on " + day);
-            System.out.println("List of exercises: ");
+            System.out.println("Displaying data for workout on " + day);
             ArrayList<Exercise> exercises = workout.getExercises();
+            System.out.println("List of exercises and sets: ");
             for (Exercise exercise : exercises) {
-                System.out.println("\t-" + exercise.getName());
+                ArrayList<Set> sets = exercise.getSets();
+                System.out.println("\t" + exercise.getName());
+                for (Set set : sets) {
+                    System.out.println(getSetInformation(set, unit));
+                }
+                System.out.println();
             }
         }
     }
