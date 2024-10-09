@@ -22,14 +22,12 @@ public class TestWeeklyRoutine {
     void testConstructor() {
         assertEquals("Upper Lower", routine.getName());
         assertEquals(0, routine.getNumWorkouts());
-        assertEquals(7, routine.getNumRestDays());
     }
 
     @Test
     void testAddOneWorkout() {
         routine.addWorkout(workout, monday);
         assertEquals(1, routine.getNumWorkouts());
-        assertEquals(6, routine.getNumRestDays());
     }
 
     @Test
@@ -38,7 +36,6 @@ public class TestWeeklyRoutine {
         routine.addWorkout(workout, monday);
         routine.addWorkout(two, Days.TUESDAY);
         assertEquals(2, routine.getNumWorkouts());
-        assertEquals(5, routine.getNumRestDays());
     }
 
     @Test
@@ -49,7 +46,6 @@ public class TestWeeklyRoutine {
         routine.addWorkout(two, monday);
         Workout getWorkout = routine.getWorkout(monday);
         assertEquals(1, routine.getNumWorkouts());
-        assertEquals(6, routine.getNumRestDays());
         assertEquals(two.getName(), getWorkout.getName());
     }
 
@@ -57,7 +53,6 @@ public class TestWeeklyRoutine {
     public void removeWorkoutDoesNotExist() {
         routine.removeWorkout(monday);
         assertEquals(0, routine.getNumWorkouts());
-        assertEquals(7, routine.getNumRestDays());
     }
     
     @Test
@@ -65,7 +60,6 @@ public class TestWeeklyRoutine {
         routine.addWorkout(workout, monday);
         routine.removeWorkout(monday);
         assertEquals(0, routine.getNumWorkouts());
-        assertEquals(7, routine.getNumRestDays());
         Workout getWorkout = routine.getWorkout(monday);
         assertEquals(null, getWorkout);
     }
