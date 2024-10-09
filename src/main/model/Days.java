@@ -1,5 +1,6 @@
 package model;
 
+// Enumeration encapsulation days of the week
 public enum Days {
     MONDAY,
     TUESDAY,
