@@ -157,6 +157,7 @@ public class FitnessLoggerApp {
         WeeklyRoutine weeklyRoutineToDelete = findRoutineByName(weeklyRoutineName);
         if (weeklyRoutineToDelete == null) {
             System.out.println("Sorry, no such routine named " + weeklyRoutineName + " has beend found.");
+            return;
         }
 
         savedRoutines.removeRoutine(weeklyRoutineToDelete);
@@ -280,7 +281,6 @@ public class FitnessLoggerApp {
             System.out.println("Displaying data for workout " + routine.getWorkout(day).getName() + " on " + day);
             System.out.println("List of exercises: ");
             ArrayList<Exercise> exercises = workout.getExercises();
-            System.out.println("List of exercises: ");
             for (Exercise exercise : exercises) {
                 System.out.println("\t-" + exercise.getName());
             }

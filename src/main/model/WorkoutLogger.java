@@ -1,7 +1,6 @@
 package model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 // Class that is able to store, and retrieve workouts given a date. 
@@ -9,7 +8,7 @@ public class WorkoutLogger {
     private HashMap<String, Workout> workoutLogs;
 
     // EFFECTS: Creates a workout logger with no workouts logged
-    public WorkoutLogger () {
+    public WorkoutLogger() {
         this.workoutLogs = new HashMap<>();
     }
 
