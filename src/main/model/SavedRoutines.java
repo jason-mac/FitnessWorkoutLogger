@@ -2,38 +2,50 @@ package model;
 
 import java.util.ArrayList;
 
+// Class modelling a list of saved workout routines, able to be retrieved from and added to
 public class SavedRoutines {
     private ArrayList<WeeklyRoutine> savedRoutines;
 
     // EFFECTS: creates a a list of saved routines with initially no routines in it
-    public void SavedRoutines() {
-        // stub
+    public SavedRoutines() {
+        this.savedRoutines = new ArrayList<>();
     }
 
     // MODIFIES: this
     // EFFECTS: adds a weekly routine to saved routines
     public void addRoutine(WeeklyRoutine weeklyRoutine) {
-        // stub
+        this.savedRoutines.add(weeklyRoutine);
     }
 
     // EFFECTS: returns a weekly routine with given name, otherwise returns null
     public WeeklyRoutine getRoutineByName(String name) {
-        return null; // stub
+        WeeklyRoutine toReturn = null;
+        for(WeeklyRoutine weeklyRoutine : savedRoutines) {
+            if(weeklyRoutine.getName().equals(name)) {
+                toReturn = weeklyRoutine;
+                break;
+            }
+        }
+        return toReturn;
     }
 
     public ArrayList<WeeklyRoutine> getRoutines() {
-        return null; // stub
+        return this.savedRoutines;
     }
 
     // MODIFIES: this
     // EFFECTS: removes the given workout from the saved routines
     public void removeRoutine(WeeklyRoutine weeklyRoutine) {
-        //stub
+        this.savedRoutines.remove(weeklyRoutine);
     }
 
     // MODIFIES: this
     // EFFECTS: clears the entire list of saved routines
-    void clearSavedRoutines() {
-        // stub
+    public void clearSavedRoutines() {
+        this.savedRoutines.clear();
+    }
+
+    public int getNumRoutinesStored() {
+        return this.savedRoutines.size();
     }
 }
