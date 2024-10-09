@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import model.Set.Unit;
 
@@ -36,6 +37,9 @@ public class TestExercise {
         Set setTwo = new Set(500.0, 5, Unit.POUNDS);
         exercise.addSet(setTwo);
         assertEquals(2, exercise.getSetCount());
+        ArrayList<Set> sets = exercise.getSets();
+        assertEquals(set, sets.get(0));
+        assertEquals(setTwo, sets.get(1));
     }
 
     @Test 
@@ -48,15 +52,21 @@ public class TestExercise {
     void testGetVolumeOneSet() {
         exercise.addSet(set);
         assertEquals(1000.0, exercise.getVolume(Unit.POUNDS));
-
     }
 
     @Test
     void testGetVolumeTwoSets()  {
-        exercise.addSet(set);
+        exercise.addSet(set); 
         assertEquals(1000.0, exercise.getVolume(Unit.POUNDS));
         Set setTwo = new Set(500.0, 5, Unit.POUNDS);
         exercise.addSet(setTwo);
         assertEquals(3500.0, exercise.getVolume(Unit.POUNDS));
+    }
+
+    @Test
+    void testSetName() {
+        assertEquals("Bench Press", exercise.getName());
+        exercise.setName("Tricep Pushdown");
+        assertEquals("Tricep Pushdown", exercise.getName());
     }
 }
