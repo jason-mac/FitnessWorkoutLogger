@@ -64,7 +64,7 @@ public class TestWorkoutLogger {
         this.logger.removeWorkout(date);
         assertEquals(1, this.logger.getNumWorkoutsLogged());
 
-        this.logger.removeWorkout(date);
+        this.logger.removeWorkout(dateTwo);
         assertEquals(0, this.logger.getNumWorkoutsLogged());
     }
 
