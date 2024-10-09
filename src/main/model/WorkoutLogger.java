@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Set;
 
-// Class that is able to store, and retrieve workouts given a date. 
+// Class modelling a workout logger that is able to store, and retrieve workouts given a date. 
 public class WorkoutLogger {
     private HashMap<String, Workout> workoutLogs;
 
@@ -12,7 +12,7 @@ public class WorkoutLogger {
         this.workoutLogs = new HashMap<>();
     }
 
-    // REQUIRES: date is int the format dd/mm/year
+    // REQUIRES: date is in the format dd/mm/year
     // MODIFIES: this
     // EFFECTS: adds a workout at given date into the collection
     //          over rides the workout if there is already one at the given date

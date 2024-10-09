@@ -3,7 +3,7 @@ package model;
 import model.Set.Unit;
 import java.util.ArrayList;
 
-// Class that models a workout, which stores a list of exercises and has a name
+// Class that models a single workout which stores a list of exercises and has a name
 public class Workout {
     private ArrayList<Exercise> exercises;
     private String name;
