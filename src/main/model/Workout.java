@@ -101,6 +101,10 @@ public class Workout {
         this.name = name;
     }
 
+    public ArrayList<Exercise> getExercises() {
+        return this.exercises;
+    }
+
     // EFFECTS: returns if true the index is out of bounds of exercises array
     private boolean outOfBounds(int index) {
         return (index < 0 || index >= exercises.size());
