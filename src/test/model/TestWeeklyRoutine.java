@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import model.Set.Unit;
 
 public class TestWeeklyRoutine {
-    static final Day monday = Day.MONDAY;
+    static final Days monday = Days.MONDAY;
     WeeklyRoutine routine;
     Workout workout;
 
     @BeforeEach
     void setup() {
         routine = new WeeklyRoutine("Upper Lower");
-        workout = createWorkout();
+        workout = createWorkout("");
     }
 
     @Test
@@ -34,9 +34,9 @@ public class TestWeeklyRoutine {
 
     @Test
     void testAddTwoWorkoutsDiffDays() {
-        Workout two = createWorkout();
+        Workout two = createWorkout("");
         routine.addWorkout(workout, monday);
-        routine.addWorkout(two, Day.TUESDAY);
+        routine.addWorkout(two, Days.TUESDAY);
         assertEquals(2, routine.getNumWorkouts());
         assertEquals(5, routine.getNumRestDays());
     }
@@ -74,18 +74,18 @@ public class TestWeeklyRoutine {
     public void swapWorkoutsBothWorkouts() {
         Workout workout2 = createWorkout("Chest");
         routine.addWorkout(workout, monday);
-        routine.addWorkout(workout2, Day.TUESDAY);
+        routine.addWorkout(workout2, Days.TUESDAY);
 
         Workout getOne = routine.getWorkout(monday);
-        Workout getTwo = routine.getWorkout(Day.TUESDAY);
+        Workout getTwo = routine.getWorkout(Days.TUESDAY);
 
         assertEquals(workout.getName(), getOne.getName());
         assertEquals(workout2.getName(), getTwo.getName());
 
-        routine.swapWorkouts(monday, Day.TUESDAY);
+        routine.swapWorkouts(monday, Days.TUESDAY);
 
         getOne = routine.getWorkout(monday);
-        getTwo = routine.getWorkout(Day.TUESDAY);
+        getTwo = routine.getWorkout(Days.TUESDAY);
 
         assertEquals(workout2.getName(), getOne.getName());
         assertEquals(workout.getName(), getTwo.getName());
@@ -94,10 +94,10 @@ public class TestWeeklyRoutine {
     @Test 
     public void swapWorkoutsOneRestDay() {
         routine.addWorkout(workout, monday);
-        routine.swapWorkouts(monday, Day.TUESDAY);
+        routine.swapWorkouts(monday, Days.TUESDAY);
  
         Workout getOne = routine.getWorkout(monday);
-        Workout getTwo = routine.getWorkout(Day.TUESDAY);
+        Workout getTwo = routine.getWorkout(Days.TUESDAY);
 
         assertEquals(null, getOne);
         assertEquals(getTwo.getName(), workout.getName());
@@ -123,13 +123,13 @@ public class TestWeeklyRoutine {
         exTwo.addSet(three);
         exTwo.addSet(four);
 
-        Workout workoutTwo = createWorkout();
+        Workout workoutTwo = createWorkout("");
 
         workout.addExercise(exOne);
         workoutTwo.addExercise(exTwo);
 
         routine.addWorkout(workout, monday);
-        routine.addWorkout(workoutTwo, Day.TUESDAY);
+        routine.addWorkout(workoutTwo, Days.TUESDAY);
 
         double exOneVolumeKG = one.getSetVolume(Unit.KILOGRAMS) + two.getSetVolume(Unit.KILOGRAMS);
         double exTwoVolumeKG = three.getSetVolume(Unit.KILOGRAMS) + four.getSetVolume(Unit.KILOGRAMS);
@@ -144,11 +144,18 @@ public class TestWeeklyRoutine {
         assertEquals(weeklyRoutineVolumeLBS, routine.getVolume(Unit.POUNDS));
     }
 
-    private Workout createWorkout() {
-        return new Workout();
+    @Test
+    void testClear() {
+        for(Days day : Days.values()) {
+            this.routine.addWorkout(createWorkout(day.toString()), day);
+        }
+
+        assertEquals(7, routine.getNumWorkouts());
+        routine.clearRoutine();
+        assertEquals(0, routine.getNumWorkouts());
     }
 
     private Workout createWorkout(String name) {
-        return new Workout();
+        return new Workout(name);
     }
 }
