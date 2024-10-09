@@ -70,4 +70,11 @@ public class TestSet {
         assertEquals(4.5, setKilograms.getWeightInKilograms());
         assertEquals(6.8, setPounds.getWeightInKilograms());
     }
+
+    @Test
+    void setRepCount() {
+        assertEquals(10, setKilograms.getRepCount());
+        setKilograms.setRepCount(12);
+        assertEquals(12, setKilograms.getRepCount());
+    }
 }
