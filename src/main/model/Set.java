@@ -2,9 +2,9 @@ package model;
 
 import java.lang.Math;
 
-// Class that models a a single set of an exercise in a workout, storing information on weights used
+// Class that models a single set done of an exercise in a workout, storing information on weights used
 // rep count and a specified unit
-// offers conversion between kilograms and pounds
+// Offers conversion between kilograms and pounds
 public class Set {
 
     // Conversion factors
@@ -17,10 +17,9 @@ public class Set {
         POUNDS,
     }
 
-    // Private Fields
-    private double weight;
-    private int repCount;
-    private Unit unit;
+    private double weight; // weight associated with the set
+    private int repCount;  // number of reps done in the set
+    private Unit unit;     // the working unit of this specific set
     
     // REQUIRES: weight > 0 and weight must be at most one decimal place and repCount > 0
     // EFFECT: Creates a set with the weight, rep count, and unit specified
