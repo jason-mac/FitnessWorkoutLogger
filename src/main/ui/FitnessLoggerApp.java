@@ -19,6 +19,9 @@ public class FitnessLoggerApp {
     private Scanner input;
     private boolean running;
 
+
+
+    // EFFECTS: runs the program until running becomes false based off user input
     public void run() {
         init();
         while (running) {
@@ -29,6 +32,8 @@ public class FitnessLoggerApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the data fields for running the program 
     private void init() {
         this.running = true;
         this.input = new Scanner(System.in);
@@ -36,6 +41,7 @@ public class FitnessLoggerApp {
         this.savedRoutines = new SavedRoutines();
     }
 
+    // EFFECTS: displays a menu for user to interact with program
     private void displayMenu() {
         System.out.println("Select from following:");
         System.out.println("\tp -> Print logged Workout");
@@ -48,6 +54,7 @@ public class FitnessLoggerApp {
         System.out.println();
     }
 
+    // EFFECTS: process user input and branches code out to corresponding input
     private void processUserInput(String userInput) {
         switch (userInput) {
             case "p":
@@ -74,6 +81,9 @@ public class FitnessLoggerApp {
         }
     }
 
+    // EFFECTS: prints out the logged workout given a date from user input
+    //          if workout logs is empty, tells user as such, end function
+    //          if date is not valid, tells user as such
     private void printLoggedWorkout() {
         if (workoutLogs.getNumWorkoutsLogged() == 0) {
             System.out.println("No logged workouts to display");
@@ -101,6 +111,9 @@ public class FitnessLoggerApp {
         printWorkoutInformation(workout, unit);
     }
 
+    // MODIFES: this
+    // EFFECTS: gets date from user to log a workout at the date
+    //          creates a workout and adds it to workoutLogs
     private void logWorkout() {
         System.out.println("Which date do you wish to log your workout for (dd/mm/year): ");
         String date = input.nextLine();
@@ -111,6 +124,10 @@ public class FitnessLoggerApp {
         System.out.println("Workout successfully logged for " + date);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a logged workout from loggedWorkouts given a date from user
+    //          if workoutLogs is empty, tells user as such, ends function
+    //          if date is not valid, tells user as such 
     private void removeLoggedWorkout() {
         if (this.workoutLogs.getNumWorkoutsLogged() == 0) {
             System.out.println("No workouts to remove.");
@@ -134,6 +151,8 @@ public class FitnessLoggerApp {
         System.out.println("Workout at " + userInput + " successfully removed!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a weekly routine given input from user stores it in savedRoutines 
     private void createWeeklyRoutine() {
         String userInput = null;
         Workout workout = null;
@@ -154,6 +173,10 @@ public class FitnessLoggerApp {
         System.out.println("Weekly routine: " + weeklyRoutine.getName() + " has been added to your planned routines.");
     }
 
+    // MODIFIES: this
+    // EFFECTS: deletes a planned weekly routine from savedRoutines given name of weekly routine from user
+    //          if savedRoutines empty, tells user as such
+    //          if weekly routine name does not exist, tells user as such
     private void deleteWeeklyRoutine() {
         if (savedRoutines.isEmpty()) {
             System.out.println("No routines to remove");
@@ -171,6 +194,8 @@ public class FitnessLoggerApp {
         System.out.println("Workout at " + weeklyRoutineName + " successfully removed!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a workout given input from user and returns it
     private Workout createWorkout() {
         Workout workout = null;
         String userInput = null;
@@ -204,6 +229,8 @@ public class FitnessLoggerApp {
         return workout;
     }
 
+    // REQUIRES: unit != null and workout != null
+    // EFFECTS: prints out the workout information in the given unit (kg or lbs)
     private void printWorkoutInformation(Workout workout, Unit unit) {
         ArrayList<Exercise> exercises = workout.getExercises();
         for (Exercise exercise : exercises) {
@@ -224,6 +251,8 @@ public class FitnessLoggerApp {
         System.out.println();
     }
 
+    // REQUIRES: unit != null, set != null
+    // EFFECTS: returns the set information in given unit as a string
     private String getSetInformation(Set set, Unit unit) {
         if (unit == Unit.KILOGRAMS) {
             return "Weight: " + set.getWeightInKilograms() + ", Rep Count: " + set.getRepCount();
@@ -232,6 +261,9 @@ public class FitnessLoggerApp {
     }
 
 
+    // EFFECTS: allows user to view their weekly routines given the name of a weekly routine
+    //          continues to ask user if they wish to view further routines
+    //          if savedRoutines is empty, tells user as such
     private void viewWeeklyRoutines() {
         boolean continueViewing = true;
         if (savedRoutines.isEmpty()) {
@@ -254,6 +286,9 @@ public class FitnessLoggerApp {
         }
     }
 
+    // EFFECTS: prints out the given message and returns the name of the desired
+    //          weekly routine to view from user, otherwise if user inputs list
+    //          it will display a list of all weekly routine names
     private String getWeeklyRoutineName(String message) {
         System.out.println(message);
         String userInput = input.nextLine();
@@ -267,6 +302,8 @@ public class FitnessLoggerApp {
         return userInput;
     }
 
+    // EFFECTS: returns a weekly routine from savedRoutines with the given name, 
+    //          otherwise returns null
     private WeeklyRoutine findRoutineByName(String name) {
         ArrayList<WeeklyRoutine> routinesList = savedRoutines.getRoutines();
         WeeklyRoutine routineByName = null;
@@ -278,6 +315,8 @@ public class FitnessLoggerApp {
         return routineByName;
     }
 
+    // REQUIRES: routine != null
+    // EFFECTS: displays the weekly routine information given the routine in a specified unit from user input
     private void displayRoutine(WeeklyRoutine routine) {
         System.out.println("Which unit would you like to see planned routine in (kg or lbs): ");
         String userInput = input.nextLine();
@@ -303,6 +342,7 @@ public class FitnessLoggerApp {
         System.out.println("Weekly volume for this routine is " + routine.getVolume(unit) + " in " + unit);
     }
 
+    // EFFECTS: creates an exercise object given user input and returns it
     private Exercise createExercise() {
         Exercise exercise = null;
         Unit unit;
@@ -330,6 +370,9 @@ public class FitnessLoggerApp {
         return exercise;
     }
 
+    // REQUIRES: unit != null
+    // EFFECTS: creates a set with user input and returns it, the set is created 
+    //          with the given unit
     private Set createSet(Unit unit) {
         double weight;
         int repCount;
