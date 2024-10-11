@@ -19,10 +19,10 @@ public class TestSet {
 
     @Test
     void testConstructor() {
-       assertEquals(100.5, setKilograms.getWeightInKilograms()); 
-       assertEquals(10, setKilograms.getRepCount());
-       assertEquals(225.5, setPounds.getWeightInPounds());
-       assertEquals(5, setPounds.getRepCount());
+        assertEquals(100.5, setKilograms.getWeightInKilograms()); 
+        assertEquals(10, setKilograms.getRepCount());
+        assertEquals(225.5, setPounds.getWeightInPounds());
+        assertEquals(5, setPounds.getRepCount());
     }
 
     @Test
@@ -49,10 +49,10 @@ public class TestSet {
 
     @Test
     void setWeightKilograms() {
-        setKilograms.setWeight(10, Unit.KILOGRAMS);
-        setPounds.setWeight(15, Unit.KILOGRAMS);
-        assertEquals(10, setKilograms.getWeightInKilograms());
-        assertEquals(15, setPounds.getWeightInKilograms());
+        setKilograms.setWeight(10.0, Unit.KILOGRAMS);
+        setPounds.setWeight(15.0, Unit.KILOGRAMS);
+        assertEquals(10.0, setKilograms.getWeightInKilograms());
+        assertEquals(15.0, setPounds.getWeightInKilograms());
         assertEquals(100.0, setKilograms.getSetVolume(Unit.KILOGRAMS));
         assertEquals(75.0, setPounds.getSetVolume(Unit.KILOGRAMS));
         assertEquals(22.0, setKilograms.getWeightInPounds());
@@ -61,10 +61,10 @@ public class TestSet {
 
     @Test
     void setWeightPounds() {
-        setKilograms.setWeight(10, Unit.POUNDS);
-        setPounds.setWeight(15, Unit.POUNDS);
-        assertEquals(10, setKilograms.getWeightInPounds());
-        assertEquals(15, setPounds.getWeightInPounds());
+        setKilograms.setWeight(10.0, Unit.POUNDS);
+        setPounds.setWeight(15.0, Unit.POUNDS);
+        assertEquals(10.0, setKilograms.getWeightInPounds());
+        assertEquals(15.0, setPounds.getWeightInPounds());
         assertEquals(100.0, setKilograms.getSetVolume(Unit.POUNDS));
         assertEquals(75.0, setPounds.getSetVolume(Unit.POUNDS));
         assertEquals(4.5, setKilograms.getWeightInKilograms());

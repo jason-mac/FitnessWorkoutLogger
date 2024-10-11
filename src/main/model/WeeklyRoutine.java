@@ -1,13 +1,14 @@
 package model;
 
 import java.util.HashMap;
-
 import model.Set.Unit;
+
+import java.lang.Math;
 
 // Class modelling a workout weekly routine storing a name and can store a workout for each day of the week
 public class WeeklyRoutine {
-    String name;
-    HashMap<Days, Workout> routine;
+    private String name;
+    private HashMap<Days, Workout> routine;
 
     // EFFECTS: Creates a weekly routine with no workouts initially
     //          sets the weekly routine name to given name
@@ -42,11 +43,11 @@ public class WeeklyRoutine {
 
     // EFFECTS: returns the total weekly workout volume 
     public double getVolume(Unit unit) {
-        double toReturn = 0;
-        for(Workout workout : routine.values()) {
-            toReturn += workout.getVolume(unit);
+        double volume = 0.0;
+        for (Workout workout : routine.values()) {
+            volume += workout.getVolume(unit);
         }
-        return toReturn;
+        return Math.round(volume * 10.0) / 10.0;
     }
 
     // EFFECTS: returns the workout at the given day

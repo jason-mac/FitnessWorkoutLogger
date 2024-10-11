@@ -140,7 +140,7 @@ public class TestWeeklyRoutine {
 
     @Test
     void testClear() {
-        for(Days day : Days.values()) {
+        for (Days day : Days.values()) {
             this.routine.addWorkout(createWorkout(day.toString()), day);
         }
 

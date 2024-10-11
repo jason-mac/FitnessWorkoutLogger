@@ -14,10 +14,10 @@ import java.util.Scanner;
 // UI application where a user can store log workouts, create workout plans, and as well as view/delete these 
 // workouts as needed
 public class FitnessLoggerApp {
-    WorkoutLogger workoutLogs;
-    SavedRoutines savedRoutines;
-    Scanner input;
-    boolean running;
+    private WorkoutLogger workoutLogs;
+    private SavedRoutines savedRoutines;
+    private Scanner input;
+    private boolean running;
 
     public void run() {
         init();

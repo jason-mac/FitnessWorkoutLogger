@@ -1,7 +1,9 @@
 package model;
 
-import model.Set.Unit;
 import java.util.ArrayList;
+import java.lang.Math;
+
+import model.Set.Unit;
 
 // Class that models a single workout which stores a list of exercises and has a name
 public class Workout {
@@ -74,11 +76,12 @@ public class Workout {
 
     // EFFECTS: Return total workout volume in given unit
     public double getVolume(Unit unit) {
-        double toReturn = 0;
+        double volume = 0.0;
         for (Exercise exercise : exercises) {
-            toReturn += exercise.getVolume(unit);
+            volume += exercise.getVolume(unit);
+            
         }
-        return toReturn;
+        return Math.round(volume * 10.0) / 10.0;
     }
 
     public String getName() {

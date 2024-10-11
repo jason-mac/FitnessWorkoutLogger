@@ -1,7 +1,9 @@
 package model;
 
-import model.Set.Unit;
 import java.util.ArrayList;
+import java.lang.Math;
+
+import model.Set.Unit;
 
 // Represents an exercise done with a name and a list of sets to be stored associated with the exercise
 public class Exercise {
@@ -27,7 +29,7 @@ public class Exercise {
         for (Set set : sets) {
             volume += set.getSetVolume(u);
         }
-        return volume;
+        return Math.round(volume * 10.0) / 10.0;
     }
 
     // EFFECT: Returns the amount of sets were performed with this exercise

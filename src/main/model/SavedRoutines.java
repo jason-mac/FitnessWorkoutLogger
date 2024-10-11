@@ -20,8 +20,8 @@ public class SavedRoutines {
     // EFFECTS: returns a weekly routine with given name, otherwise returns null
     public WeeklyRoutine getRoutineByName(String name) {
         WeeklyRoutine toReturn = null;
-        for(WeeklyRoutine weeklyRoutine : savedRoutines) {
-            if(weeklyRoutine.getName().equals(name)) {
+        for (WeeklyRoutine weeklyRoutine : savedRoutines) {
+            if (weeklyRoutine.getName().equals(name)) {
                 toReturn = weeklyRoutine;
                 break;
             }

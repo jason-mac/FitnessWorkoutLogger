@@ -62,7 +62,7 @@ public class TestWorkout {
     void testClearExercisesOneExercises() {
         workout.addExercise(exercise);
         ArrayList<Exercise> exercises = workout.getExercises();
-        assertEquals(exercise ,exercises.get(0));
+        assertEquals(exercise, exercises.get(0));
         assertEquals(1, workout.getNumberOfExercises());    
         workout.clearExercises();
         assertTrue(workout.isEmpty());
@@ -74,8 +74,8 @@ public class TestWorkout {
         workout.addExercise(exercise);
         workout.addExercise(exercise2);
         ArrayList<Exercise> exercises = workout.getExercises();
-        assertEquals(exercise ,exercises.get(0));
-        assertEquals(exercise2 ,exercises.get(1));
+        assertEquals(exercise, exercises.get(0));
+        assertEquals(exercise2, exercises.get(1));
         assertEquals(2, workout.getNumberOfExercises());    
         workout.clearExercises();
         assertTrue(workout.isEmpty());
