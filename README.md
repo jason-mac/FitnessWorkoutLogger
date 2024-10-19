@@ -16,3 +16,6 @@ I chose this project because I frequent the gym myself, but I've often found it 
 
 - As a user, I want to be able to view the workout volume for any logged workout and also view the planned weekly workout volume for any stored weekly workout plan
 
+- As a user, I want to be able to save my workout logs and created weekly routines to file (if I so choose)
+
+- As a user, I want to be able to be able to load  workout logs and created weekly routines from file (if I so choose)
