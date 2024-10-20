@@ -1,6 +1,8 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,4 +79,73 @@ public class TestSet {
         setKilograms.setRepCount(12);
         assertEquals(12, setKilograms.getRepCount());
     }
+
+    @Test
+    public void testEqualsSameObject() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        assertTrue(set1.equals(set1));
+    }
+
+    @Test
+    public void testEqualsNull() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        assertFalse(set1.equals(null));
+    }
+
+    @Test
+    public void testEqualsDifferentClass() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        String notASet = "Not a Set";
+        assertFalse(set1.equals(notASet));
+    }
+
+    @Test
+    public void testEqualsEqualSets() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        Set set2 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        assertTrue(set1.equals(set2));
+    }
+
+    @Test
+    public void testEqualsDifferentWeight() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        Set set2 = new Set(60.0, 10, Set.Unit.KILOGRAMS);
+        assertFalse(set1.equals(set2));
+    }
+
+    @Test
+    public void testEqualsDifferentRepCount() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        Set set2 = new Set(50.0, 20, Set.Unit.KILOGRAMS);
+        assertFalse(set1.equals(set2));
+    }
+
+    @Test
+    public void testEqualsDifferentUnit() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        Set set2 = new Set(50.0, 10, Set.Unit.POUNDS);
+        assertFalse(set1.equals(set2));
+    }
+
+    @Test
+    public void testHashCodeEqualSets() {
+        Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        Set set2 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
+        assertEquals(set1.hashCode(), set2.hashCode());
+    }
+
+    @Test
+    public void testEqualsEqualSetsWithNull() {
+        Set set1 = new Set(50.0, 10, null);
+        Set set2 = new Set(50.0, 10, null);
+        assertTrue(set1.equals(set2));
+    }
+
+    @Test
+    public void testHashCodeEqualSetsWithNull() {
+        Set set1 = new Set(50.0, 10, null);
+        Set set2 = new Set(50.0, 10, null);
+        assertEquals(set1.hashCode(), set2.hashCode());
+    }
+
 }
