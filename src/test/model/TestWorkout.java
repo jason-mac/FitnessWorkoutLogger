@@ -2,6 +2,7 @@ package model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import model.Set.Unit;
 
 public class TestWorkout {
-    Workout workout;     
-    Exercise exercise;
-    Set set;
+    private Workout workout;     
+    private Exercise exercise;
+    private Set set;
 
     @BeforeEach 
     void setup() {    
@@ -227,6 +228,77 @@ public class TestWorkout {
     void testSetName() {
         workout.setName("John Cena");
         assertEquals("John Cena", workout.getName());
+    }
+
+    @Test
+    void testEqualsSameObject() {
+        assertTrue(workout.equals(workout));
+    }
+
+    @Test
+    void testEqualsSameName() {
+        Workout w1 = new Workout("Name");
+        Workout w2 = new Workout("Name");
+        assertTrue(w1.equals(w2));
+    }
+
+    @Test
+    void testEqualsDifferentObject() {
+        assertFalse(workout.equals(exercise));
+    }
+
+    @Test
+    void testEqualsBothNullNames() {
+        Workout w1 = new Workout(null);
+        Workout w2 = new Workout(null);
+        assertTrue(w1.equals(w2));
+    }
+
+
+    @Test
+    void testEqualsNull() {
+        assertNotEquals(workout, null);
+    }
+
+    @Test
+    void testHashCodeConsistency() {
+        workout.addExercise(exercise);
+        exercise.addSet(new Set(235.4, 10, Unit.KILOGRAMS));
+        Workout workout2 = new Workout(workout.getName());
+        ArrayList<Exercise> lst = workout.getExercises();
+        for(Exercise exercise : lst) {
+            workout2.addExercise(exercise);
+        }
+        assertEquals(workout.hashCode(), workout2.hashCode());
+        workout2.addExercise(new Exercise("Lat Pull Down")); 
+        assertNotEquals(workout.hashCode(), workout2.hashCode());
+    }
+
+    @Test 
+    void testEqualsThisExerciseNotEqualOther() {
+        workout.addExercise(exercise);
+        exercise.addSet(new Set(235.4, 10, Unit.KILOGRAMS));
+        Workout workout2 = new Workout(workout.getName());
+        ArrayList<Exercise> lst = workout.getExercises();
+        for(Exercise exercise : lst) {
+            workout2.addExercise(exercise);
+        }
+        workout2.addExercise(new Exercise("Lat Pull Down")); 
+        assertNotEquals(workout, workout2);
+    }
+
+    @Test
+    void testEqualsThisNameNullOtherNot() {
+        Workout workout2 = new Workout(null);
+        assertNotEquals(workout2, workout);
+        assertNotEquals(workout2.hashCode(), workout.hashCode());
+    }
+
+    @Test
+    void testEqualsNamesNotEqual() {
+        Workout workout2 = new Workout("LOL");
+        assertNotEquals(workout2, workout);
+        assertNotEquals(workout2.hashCode(), workout.hashCode());
     }
 
     Exercise makeExercise(String name) {
