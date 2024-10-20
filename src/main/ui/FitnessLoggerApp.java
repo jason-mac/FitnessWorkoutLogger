@@ -20,7 +20,6 @@ public class FitnessLoggerApp {
     private boolean running;
 
 
-
     // EFFECTS: runs the program until running becomes false based off user input
     public void run() {
         init();
