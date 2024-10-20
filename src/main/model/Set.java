@@ -80,6 +80,36 @@ public class Set {
         return this.repCount;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(weight);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + repCount;
+        result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Set other = (Set) obj;
+        if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
+            return false;
+        if (repCount != other.repCount)
+            return false;
+        if (unit != other.unit)
+            return false;
+        return true;
+    }
+
     // EFFECTS: returns the given value back in one decimal place only 
     private double oneDecimal(double value) {
         return Math.round(value * 10.0) / 10.0;
