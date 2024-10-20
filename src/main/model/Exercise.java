@@ -54,7 +54,7 @@ public class Exercise {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((sets == null) ? 0 : sets.hashCode());
+        result = prime * result + sets.hashCode();
         return result;
     }
 
@@ -72,11 +72,9 @@ public class Exercise {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (sets == null) {
-            if (other.sets != null)
-                return false;
-        } else if (!sets.equals(other.sets))
+        if(!sets.equals(other.sets)) {
             return false;
+        }
         return true;
     }
 }
