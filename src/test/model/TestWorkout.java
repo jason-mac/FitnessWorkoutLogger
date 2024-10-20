@@ -242,6 +242,7 @@ public class TestWorkout {
         assertTrue(w1.equals(w2));
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     void testEqualsDifferentObject() {
         assertFalse(workout.equals(exercise));

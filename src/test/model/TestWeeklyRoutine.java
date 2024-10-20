@@ -170,6 +170,7 @@ public class TestWeeklyRoutine {
         assertFalse(routine.equals(w2));
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test 
     void testEqualsDifferentClass() {
         assertFalse(routine.equals(workout));

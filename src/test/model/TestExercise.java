@@ -85,6 +85,7 @@ public class TestExercise {
         assertFalse(exercise1.equals(null));
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     void testEqualsDifferentClass() {
         Exercise exercise1 = new Exercise("Bench Press");
