@@ -1,6 +1,9 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -147,6 +150,59 @@ public class TestWeeklyRoutine {
         assertEquals(7, routine.getNumWorkouts());
         routine.clearRoutine();
         assertEquals(0, routine.getNumWorkouts());
+    }
+
+    @Test 
+    void testEqualsSameObject() {
+        assertTrue(routine.equals(routine));
+    }
+
+    @Test 
+    void testEqualsSameName() {
+        WeeklyRoutine w2 = new WeeklyRoutine("Upper Lower");
+        assertTrue(routine.equals(w2));
+        assertEquals(w2.hashCode(), routine.hashCode());
+    }
+
+    @Test
+    void testEqualsNullObject() {
+        WeeklyRoutine w2 = null;
+        assertFalse(routine.equals(w2));
+    }
+
+    @Test 
+    void testEqualsDifferentClass() {
+        assertFalse(routine.equals(workout));
+    }
+
+    @Test
+    void testEqualsDifferentName() {
+        WeeklyRoutine wr2 = new WeeklyRoutine("NOT SAME NAME");
+        assertFalse(routine.equals(wr2));
+        assertNotEquals(routine.hashCode(), wr2.hashCode());
+    }
+
+    @Test
+    void testEqualsNullName() {
+        WeeklyRoutine wr2 = new WeeklyRoutine(null);
+        assertFalse(wr2.equals(routine));
+        assertNotEquals(wr2.hashCode(), routine.hashCode());
+    }
+
+    @Test
+    void testEqualsBothNull() {
+        WeeklyRoutine wr1 = new WeeklyRoutine(null);
+        WeeklyRoutine wr2 = new WeeklyRoutine(null);
+        assertTrue(wr2.equals(wr1));
+        assertEquals(wr2.hashCode(), wr1.hashCode());
+    }
+
+    @Test 
+    void testEqualsDifferentRoutine() {
+        WeeklyRoutine wr2 = new WeeklyRoutine("Upper Lower");
+        wr2.addWorkout(new Workout("Back"), Days.TUESDAY);
+        assertFalse(wr2.equals(routine));
+
     }
 
     private Workout createWorkout(String name) {
