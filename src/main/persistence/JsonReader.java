@@ -1,7 +1,7 @@
 package persistence;
 
 import model.*;
-import ui.FitnessLoggerApp;
+import model.Set.Unit;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -22,62 +22,121 @@ public class JsonReader {
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
-        //stub
+        this.source = source;
     }
 
     // EFFECTS: reads workoutLogs file from file and returns it
     //          throws IOException if an error occurs reading data from file
     public WorkoutLogger readWorkoutLogs() throws IOException {
-        //stub
-        return null;
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseWorkoutLogger(jsonObject);
     }
 
     // EFFECTS: reads savedRoutines files and returns it
     //          throws IOexception if an error occurs reading data
     public SavedRoutines readSavedRoutines() throws IOException {
-        // stub
-        return null;
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseSavedRoutines(jsonObject);
     }
 
     private String readFile(String source) throws IOException {
-        return null;
-        //stub
+        StringBuilder contenBuilder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contenBuilder.append(s));
+        }
+
+        return contenBuilder.toString();
     }
 
 
     //EFFECTS: parses savedroutines from JSON object and returns it
     private SavedRoutines parseSavedRoutines(JSONObject jsonObject) {
-        //stub
-        return null;
+        SavedRoutines sr = new SavedRoutines();
+        addRoutines(sr, jsonObject);
+        return sr;
+    }
+
+    private void addRoutines(SavedRoutines sr, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("savedRoutines");
+        for(Object json : jsonArray) {
+            JSONObject nextRoutine = (JSONObject) json;
+            addRoutine(sr, nextRoutine);
+        }
+    } 
+
+    private void addRoutine(SavedRoutines sr, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+
+        WeeklyRoutine weeklyRoutine = new WeeklyRoutine(name);
+        JSONArray routineJsonArray = jsonObject.getJSONArray("routine");
+        for(Object json : routineJsonArray) {
+            JSONObject workoutDayPairJson = (JSONObject) json;
+            addWorkoutDayPair(weeklyRoutine, workoutDayPairJson);
+        }
+        sr.addRoutine(weeklyRoutine);
+    }
+
+    private void addWorkoutDayPair(WeeklyRoutine weeklyRoutine, JSONObject jsonObject) {
+        Days day = Days.valueOf(jsonObject.getString("day"));
+        JSONObject workoutJsonData = jsonObject.getJSONObject("workout");
+        Workout workout = jsonToWorkout(workoutJsonData);
+        weeklyRoutine.addWorkout(workout, day);
+    }
+
+    private Workout jsonToWorkout(JSONObject jsonObject) {
+        JSONArray jsonExercisesArray = jsonObject.getJSONArray("exercises");
+        String name = jsonObject.getString("name");
+        Workout workout = new Workout(name);
+        for(Object json : jsonExercisesArray) {
+            JSONObject exerciseJson = (JSONObject) json;
+            addExercise(workout, exerciseJson);
+        }
+        return workout;
+    }
+
+    // MODIFIES: exercise
+    // EFFECTS: parses exercise from json object and adds it to workout 
+    private void addExercise(Workout workout, JSONObject jsonObject) {
+        JSONArray jsonSetsArray = jsonObject.getJSONArray("sets");
+        String name = jsonObject.getString("name");
+        Exercise exercise = new Exercise(name);
+        for(Object json : jsonSetsArray) {
+            JSONObject setJson = (JSONObject) json;
+            addSet(exercise, setJson);
+        }
+        workout.addExercise(exercise);
+    }
+
+    // MODIFIES: exercise
+    // EFFECTS: parses set from json object and adds it to exercises
+    private void addSet(Exercise exercise, JSONObject jsonObject) {
+        double weight = jsonObject.getDouble("weight");
+        int repCount = jsonObject.getInt("repCount");
+        Unit unit = Unit.valueOf(jsonObject.getString("unit"));
+        exercise.addSet(new Set(weight, repCount, unit));
     }
 
     //EFFECTS: parses workoutlogger from JSON object and returns it
     private WorkoutLogger parseWorkoutLogger(JSONObject jsonObject) {
-        //stub
-        return null;
+        WorkoutLogger wl = new WorkoutLogger();
+        addWorkouts(wl, jsonObject);
+        return wl;
     }
 
-    // MODIFIES: sr
-    // EFFECTS: parses weekly routines from json object and adds them to saved routines
-    private void addWeeklyRoutines(SavedRoutines sr, JSONObject jsonObject) {
-       //stub
-    }
-
-    // MODIFIES: sr
-    // EFFECTS: parses weekly routine from json object and adds them to saved routines
-    private void addWeeklyRoutine(SavedRoutines sr, JSONObject jsonObject) {
-        //stub
-    }
     
     // MODIFIES: wl 
     // EFFECTS: parses workouts from json object and adds them to workout logger 
     private void addWorkouts(WorkoutLogger wl, JSONObject jsonObject) {
-       //stub
-    }
-
-    // MODIFIES: sr
-    // EFFECTS: parses weekly routines from jsob object and adds them to workout logger 
-    private void addWorkout(WorkoutLogger wl, JSONObject jsonObject) {
-        //stub
+        JSONArray jsonDateWorkoutPairs = jsonObject.getJSONArray("workoutLogs");
+        for(Object json : jsonDateWorkoutPairs) {
+            JSONObject jsonDateWorkoutPair = (JSONObject) json;
+            String date = jsonDateWorkoutPair.getString("date");
+            JSONObject jsonWorkout = jsonDateWorkoutPair.getJSONObject("workout");
+            Workout workout = jsonToWorkout(jsonWorkout);
+            wl.addWorkout(date, workout);
+        }
     }
 }
