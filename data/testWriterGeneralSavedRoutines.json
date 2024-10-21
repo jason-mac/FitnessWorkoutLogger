@@ -1,0 +1,36 @@
+{"savedRoutines": [
+    {
+        "routine": [{
+            "workout": {
+                "exercises": [{
+                    "sets": [{
+                        "unit": "KILOGRAMS",
+                        "weight": 12.3,
+                        "repCount": 5
+                    }],
+                    "name": "Bench Press"
+                }],
+                "name": "Strong"
+            },
+            "day": "MONDAY"
+        }],
+        "name": "Upper"
+    },
+    {
+        "routine": [{
+            "workout": {
+                "exercises": [{
+                    "sets": [{
+                        "unit": "POUNDS",
+                        "weight": 32.4,
+                        "repCount": 5
+                    }],
+                    "name": "Leg Raises"
+                }],
+                "name": "Flexibility"
+            },
+            "day": "TUESDAY"
+        }],
+        "name": "Lower"
+    }
+]}

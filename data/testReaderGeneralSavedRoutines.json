@@ -1,0 +1,38 @@
+{"savedRoutines": [
+    {
+        "name": "Upper Lower",
+        "routine": [{
+            "workout": {
+                "exercises": [{
+                    "sets": [ {
+                        "unit": "KILOGRAMS",
+                        "weight": 5.5,
+                        "repCount": 2
+                    }
+                    ],
+                    "name": "Power"
+                }],
+                "name": "Name"
+            },
+            "day": "MONDAY"
+        }]
+    },
+    {
+        "name": "Push Pull Legs",
+        "routine": [{
+            "workout": { 
+                "exercises": [{
+                    "sets": [ {
+                        "unit": "KILOGRAMS",
+                        "weight": 5.5,
+                        "repCount": 2
+                    }
+                    ],
+                    "name": "Power"
+                }],
+                "name": "Name2"
+            },
+            "day": "TUESDAY"
+        }]
+    }
+]}
