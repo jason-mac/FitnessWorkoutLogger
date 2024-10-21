@@ -2,7 +2,7 @@ package persistence;
 
 import model.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /*
  * This code is based on code provided by JsonSerializationDemo 
@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestJson {
     protected void checkWorkout(Workout other, Workout workout) {
-        assertEquals(other, workout);
+        assertTrue(other.equals(workout));
     }
 
     protected void checkWeeklyRoutine(WeeklyRoutine other, WeeklyRoutine weeklyRoutine) {
-        assertEquals(other, weeklyRoutine);
+        assertTrue(other.equals(weeklyRoutine));
     }
 }
 

@@ -1,19 +1,13 @@
 package persistence;
 
 import model.*;
+import model.Set.Unit;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
-import org.json.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +34,7 @@ public class TestJsonReader extends TestJson {
 
     @Test
     void testReaderEmptyWorkoutLoggerSavedRoutines() {
-        JsonReader readerWL = new JsonReader("./data/testReaderEmptyWorkRoom.json");
+        JsonReader readerWL = new JsonReader("./data/testReaderEmptyWorkoutLogger.json");
         JsonReader readerSR = new JsonReader("./data/testReaderEmptySavedRoutines.json");
         try {
             WorkoutLogger workoutLogger = readerWL.readWorkoutLogs();
@@ -61,6 +55,11 @@ public class TestJsonReader extends TestJson {
             Workout savedWorkoutTwo = new Workout("Name2");
             WeeklyRoutine savedWeeklyRoutineOne = new WeeklyRoutine("Upper Lower");
             WeeklyRoutine savedWeeklyRoutineTwo = new WeeklyRoutine("Push Pull Legs");
+            Exercise exercise = new Exercise("Power");
+            Set set = new Set(5.5, 2, Unit.KILOGRAMS);
+            exercise.addSet(set);
+            savedWorkoutOne.addExercise(exercise);
+            savedWorkoutTwo.addExercise(exercise);
 
             savedWeeklyRoutineOne.addWorkout(savedWorkoutOne, Days.MONDAY);
             savedWeeklyRoutineTwo.addWorkout(savedWorkoutTwo, Days.TUESDAY);

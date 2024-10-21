@@ -1,6 +1,5 @@
 package persistence;
 
-import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.Test;
 import model.*;
 import model.Set.Unit;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 /*
