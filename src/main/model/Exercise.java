@@ -1,12 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.Math;
 
 import model.Set.Unit;
+import persistence.Writeable;
 
 // Represents an exercise done with a name and a list of sets to be stored associated with the exercise
-public class Exercise {
+public class Exercise implements Writeable {
 
     private String name;            // name of exercise
     private ArrayList<Set> sets;    // list of sets to be stored
@@ -81,5 +86,22 @@ public class Exercise {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", name);
+        jsonObject.put("sets", this.setsToJson());
+        return jsonObject;
+    }
+
+    // EFFECTS: returns sets in this exercise as JSON array
+    private JSONArray setsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for(Set set : sets) {
+            jsonArray.put(set.toJson());
+        }
+        return jsonArray;
     }
 }

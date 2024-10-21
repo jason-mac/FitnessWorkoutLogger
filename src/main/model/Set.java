@@ -2,10 +2,14 @@ package model;
 
 import java.lang.Math;
 
+import org.json.JSONObject;
+
+import persistence.Writeable;
+
 // Class that models a single set done of an exercise in a workout, storing information on weights used
 // rep count and a specified unit
 // Offers conversion between kilograms and pounds
-public class Set {
+public class Set implements Writeable {
 
     // Conversion factors
     private static final double POUNDS_TO_KILOGRAMS = 0.45359;
@@ -119,5 +123,14 @@ public class Set {
     // EFFECTS: returns the given value back in one decimal place only 
     private double oneDecimal(double value) {
         return Math.round(value * 10.0) / 10.0;
+    }
+
+    @Override 
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("weight", weight);
+        jsonObject.put("repCount", repCount);
+        jsonObject.put("unit", unit);
+        return jsonObject;
     }
 }

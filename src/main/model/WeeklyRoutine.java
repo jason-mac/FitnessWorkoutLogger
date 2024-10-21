@@ -1,12 +1,17 @@
 package model;
 
 import java.util.HashMap;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import model.Set.Unit;
+import persistence.Writeable;
 
 import java.lang.Math;
 
 // Class modelling a workout weekly routine storing a name and can store a workout for each day of the week
-public class WeeklyRoutine {
+public class WeeklyRoutine implements Writeable  {
     private String name;
     private HashMap<Days, Workout> routine;
 
@@ -103,5 +108,25 @@ public class WeeklyRoutine {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("routine", routinesToJson());
+        return json;
+    }
+
+    private JSONArray routinesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Days day : routine.keySet()) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("day", day.toString());
+            jsonObject.put("workout", routine.get(day).toJson());
+
+            jsonArray.put(jsonObject);
+        }
+        return jsonArray;
     }
 }

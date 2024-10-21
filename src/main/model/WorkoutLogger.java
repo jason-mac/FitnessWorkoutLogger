@@ -3,8 +3,13 @@ package model;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writeable;
+
 // Class modelling a workout logger that is able to store, and retrieve workouts given a date. 
-public class WorkoutLogger {
+public class WorkoutLogger implements Writeable {
     private HashMap<String, Workout> workoutLogs;
 
     // EFFECTS: Creates a workout logger with no workouts logged
@@ -51,5 +56,22 @@ public class WorkoutLogger {
 
     public HashMap<String, Workout> getWorkoutLogs() {
         return workoutLogs;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        Set<String> dates = workoutLogs.keySet();
+        for(String date : dates) {
+            JSONObject workoutLogJson = new JSONObject();
+            workoutLogJson.put("date", date);
+            workoutLogJson.put("workout", workoutLogs.get(date).toJson());
+
+            jsonArray.put(workoutLogJson);
+        }
+
+        jsonObject.put("workoutLogs", jsonArray);
+        return jsonObject;
     }
 }

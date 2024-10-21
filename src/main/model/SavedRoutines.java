@@ -2,8 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import persistence.Writeable;
+
 // Class modelling a list of saved workout routines, able to be retrieved from and added to
-public class SavedRoutines {
+public class SavedRoutines implements Writeable {
     private ArrayList<WeeklyRoutine> savedRoutines;
 
     // EFFECTS: creates a a list of saved routines with initially no routines in it
@@ -51,5 +56,22 @@ public class SavedRoutines {
 
     public int getNumRoutinesStored() {
         return this.savedRoutines.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("savedRoutines", savedRoutinesToJson());
+        return json;
+    }
+
+    private JSONArray savedRoutinesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for(WeeklyRoutine weeklyRoutine : savedRoutines) {
+            jsonArray.put(weeklyRoutine.toJson());
+        }
+
+        return jsonArray;
     }
 }

@@ -1,14 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.Math;
 
 import model.Set.Unit;
+import persistence.Writeable;
 
 // Class that models a single workout which stores a list of exercises and has a name
-public class Workout {
-    private ArrayList<Exercise> exercises;
+public class Workout implements Writeable {
     private String name;
+    private ArrayList<Exercise> exercises;
     
 
     // EFFECTS: Construct a workout with no exercises and sets name to given name 
@@ -142,5 +147,22 @@ public class Workout {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("exercises", this.exercisesToJson());
+
+        return json;
+    }
+
+    private JSONArray exercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for(Exercise exercise : exercises) {
+            jsonArray.put(exercise.toJson());
+        }
+        return jsonArray;
     }
 }
