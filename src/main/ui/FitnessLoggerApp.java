@@ -6,6 +6,13 @@ import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /* SOURCE CREDITS
 * Heavy Influence from TellerApp.java through out the code
 * Source: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
@@ -14,14 +21,20 @@ import java.util.Scanner;
 // UI application where a user can store log workouts, create workout plans, and as well as view/delete these 
 // workouts as needed
 public class FitnessLoggerApp {
+    private static final String JSON_STORE_WORKOUTLOGS = "./data/workoutLogger.json";
+    private static final String JSON_STORE_SAVED_ROUTINES = "./data/savedRoutines.json";
     private WorkoutLogger workoutLogs;
     private SavedRoutines savedRoutines;
     private Scanner input;
     private boolean running;
+    private JsonReader readerWorkoutLogs;
+    private JsonReader readerSavedRoutines;
+    private JsonWriter writerWorkoutLogs;
+    private JsonWriter writerSavedRoutines;
 
 
     // EFFECTS: runs the program until running becomes false based off user input
-    public void run() {
+    public void run() throws FileNotFoundException {
         init();
         while (running) {
             String userInput = null;
@@ -33,11 +46,15 @@ public class FitnessLoggerApp {
 
     // MODIFIES: this
     // EFFECTS: initializes the data fields for running the program 
-    private void init() {
+    private void init() throws FileNotFoundException {
         this.running = true;
         this.input = new Scanner(System.in);
         this.workoutLogs = new WorkoutLogger();
         this.savedRoutines = new SavedRoutines();
+        writerWorkoutLogs = new JsonWriter(JSON_STORE_WORKOUTLOGS);
+        readerWorkoutLogs = new JsonReader(JSON_STORE_WORKOUTLOGS);
+        writerSavedRoutines = new JsonWriter(JSON_STORE_SAVED_ROUTINES);
+        readerSavedRoutines = new JsonReader(JSON_STORE_SAVED_ROUTINES);
     }
 
     // EFFECTS: displays a menu for user to interact with program
@@ -49,6 +66,8 @@ public class FitnessLoggerApp {
         System.out.println("\tc -> Create Weekly Routine");
         System.out.println("\tv -> View Weekly Routine");
         System.out.println("\td -> Delete Weekly Routine");
+        System.out.println("\tsave -> save your workout logs and saved routines to file");
+        System.out.println("\tload -> load your saved workout logs and saved routines from file");
         System.out.println("\tq (or any key except for those above) -> quit");
         System.out.println();
     }
@@ -71,6 +90,12 @@ public class FitnessLoggerApp {
             case "v":
                 viewWeeklyRoutines();
                 break;
+            case "save":
+                saveLogsAndRoutines();
+                break;
+            case "load":
+                loadLogsAndRoutines();
+                break;
             case "d":
                 deleteWeeklyRoutine();
                 break;
@@ -89,7 +114,7 @@ public class FitnessLoggerApp {
             return;
         }
 
-        System.out.println("Which date would you like to remove a workout from (type in 'list' for possible dates): ");
+        System.out.println("Which date would you like to view a workout from (type in 'list' for possible dates): ");
         String userInput = input.nextLine();
         if (userInput.equals("list")) {
             for (String date : this.workoutLogs.getDates()) {
@@ -385,5 +410,41 @@ public class FitnessLoggerApp {
         input.nextLine();
 
         return new Set(weight, repCount, unit);
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveLogsAndRoutines() {
+        try {
+            writerSavedRoutines.open();
+            writerWorkoutLogs.open();
+            writerSavedRoutines.write(savedRoutines);;
+            writerWorkoutLogs.write(workoutLogs);
+            writerSavedRoutines.close();
+            writerWorkoutLogs.close();
+
+            System.out.println("Saved your saved routines to " + JSON_STORE_SAVED_ROUTINES);
+            System.out.println("Saved your workout logs to " + JSON_STORE_WORKOUTLOGS);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to files: ");
+            System.out.println("\t -" + JSON_STORE_SAVED_ROUTINES);
+            System.out.println("\t -" + JSON_STORE_WORKOUTLOGS);
+        }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: load savedRoutines and workoutLogs from file
+    private void loadLogsAndRoutines() {
+        try {
+            workoutLogs = readerWorkoutLogs.readWorkoutLogs();
+            savedRoutines = readerSavedRoutines.readSavedRoutines();
+            System.out.println("Loaded your previous workout logs and saved routines from: ");
+            System.out.println("\t -" + JSON_STORE_SAVED_ROUTINES);
+            System.out.println("\t -" + JSON_STORE_WORKOUTLOGS);
+        } catch (IOException e) {
+            System.out.println("Unable to read from files: ");
+            System.out.println("\t -" + JSON_STORE_SAVED_ROUTINES);
+            System.out.println("\t -" + JSON_STORE_WORKOUTLOGS);
+        }
     }
 }
