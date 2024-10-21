@@ -14,41 +14,47 @@ import java.io.*;
 
 // Represents a wrtier that writes JSON representation of WorkoutLogger and SavedRoutines to file
 public class JsonWriter {
+    private static final int TAB = 4;
+    private PrintWriter writer;
+    private String destination;
 
     // EFFECTS: constructs a writer to write destination to file
     public JsonWriter(String destination) {
-        //stub
+        this.destination = destination;
     }
 
     // MODIFIES: this
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     //          be opened for writing
     public void open() throws FileNotFoundException {
-        //stub
+        writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of savedRoutines to file
     public void write(SavedRoutines sr) {
-        //stub
+        JSONObject json = sr.toJson();
+        saveToFile(json.toString(TAB));
+
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of workout logger to file
     public void write(WorkoutLogger wl) {
-        //stub
+        JSONObject json = wl.toJson();
+        saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {
-        //stub
+        writer.close();
     }
 
     // MODIFIES: this
     // EFFECTS: writes string to file
     private void saveToFile(String json) {
-        //stub
+        writer.print(json);
     }
     
 }
