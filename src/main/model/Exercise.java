@@ -99,7 +99,7 @@ public class Exercise implements Writeable {
     // EFFECTS: returns sets in this exercise as JSON array
     private JSONArray setsToJson() {
         JSONArray jsonArray = new JSONArray();
-        for(Set set : sets) {
+        for (Set set : sets) {
             jsonArray.put(set.toJson());
         }
         return jsonArray;

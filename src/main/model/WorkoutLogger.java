@@ -63,7 +63,7 @@ public class WorkoutLogger implements Writeable {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         Set<String> dates = workoutLogs.keySet();
-        for(String date : dates) {
+        for (String date : dates) {
             JSONObject workoutLogJson = new JSONObject();
             workoutLogJson.put("date", date);
             workoutLogJson.put("workout", workoutLogs.get(date).toJson());

@@ -160,7 +160,7 @@ public class Workout implements Writeable {
 
     private JSONArray exercisesToJson() {
         JSONArray jsonArray = new JSONArray();
-        for(Exercise exercise : exercises) {
+        for (Exercise exercise : exercises) {
             jsonArray.put(exercise.toJson());
         }
         return jsonArray;

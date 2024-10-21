@@ -92,7 +92,6 @@ public class TestSet {
         assertFalse(set1.equals(null));
     }
 
-    @SuppressWarnings("unlikely-arg-type")
     @Test
     void testEqualsDifferentClass() {
         Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);

@@ -242,7 +242,6 @@ public class TestWorkout {
         assertTrue(w1.equals(w2));
     }
 
-    @SuppressWarnings("unlikely-arg-type")
     @Test
     void testEqualsDifferentObject() {
         assertFalse(workout.equals(exercise));
@@ -267,7 +266,7 @@ public class TestWorkout {
         exercise.addSet(new Set(235.4, 10, Unit.KILOGRAMS));
         Workout workout2 = new Workout(workout.getName());
         ArrayList<Exercise> lst = workout.getExercises();
-        for(Exercise exercise : lst) {
+        for (Exercise exercise : lst) {
             workout2.addExercise(exercise);
         }
         assertEquals(workout.hashCode(), workout2.hashCode());
@@ -281,7 +280,7 @@ public class TestWorkout {
         exercise.addSet(new Set(235.4, 10, Unit.KILOGRAMS));
         Workout workout2 = new Workout(workout.getName());
         ArrayList<Exercise> lst = workout.getExercises();
-        for(Exercise exercise : lst) {
+        for (Exercise exercise : lst) {
             workout2.addExercise(exercise);
         }
         workout2.addExercise(new Exercise("Lat Pull Down")); 

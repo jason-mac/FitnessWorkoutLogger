@@ -61,7 +61,7 @@ public class JsonReader {
 
     private void addRoutines(SavedRoutines sr, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("savedRoutines");
-        for(Object json : jsonArray) {
+        for (Object json : jsonArray) {
             JSONObject nextRoutine = (JSONObject) json;
             addRoutine(sr, nextRoutine);
         }
@@ -72,7 +72,7 @@ public class JsonReader {
 
         WeeklyRoutine weeklyRoutine = new WeeklyRoutine(name);
         JSONArray routineJsonArray = jsonObject.getJSONArray("routine");
-        for(Object json : routineJsonArray) {
+        for (Object json : routineJsonArray) {
             JSONObject workoutDayPairJson = (JSONObject) json;
             addWorkoutDayPair(weeklyRoutine, workoutDayPairJson);
         }
@@ -90,7 +90,7 @@ public class JsonReader {
         JSONArray jsonExercisesArray = jsonObject.getJSONArray("exercises");
         String name = jsonObject.getString("name");
         Workout workout = new Workout(name);
-        for(Object json : jsonExercisesArray) {
+        for (Object json : jsonExercisesArray) {
             JSONObject exerciseJson = (JSONObject) json;
             addExercise(workout, exerciseJson);
         }
@@ -103,7 +103,7 @@ public class JsonReader {
         JSONArray jsonSetsArray = jsonObject.getJSONArray("sets");
         String name = jsonObject.getString("name");
         Exercise exercise = new Exercise(name);
-        for(Object json : jsonSetsArray) {
+        for (Object json : jsonSetsArray) {
             JSONObject setJson = (JSONObject) json;
             addSet(exercise, setJson);
         }
@@ -131,7 +131,7 @@ public class JsonReader {
     // EFFECTS: parses workouts from json object and adds them to workout logger 
     private void addWorkouts(WorkoutLogger wl, JSONObject jsonObject) {
         JSONArray jsonDateWorkoutPairs = jsonObject.getJSONArray("workoutLogs");
-        for(Object json : jsonDateWorkoutPairs) {
+        for (Object json : jsonDateWorkoutPairs) {
             JSONObject jsonDateWorkoutPair = (JSONObject) json;
             String date = jsonDateWorkoutPair.getString("date");
             JSONObject jsonWorkout = jsonDateWorkoutPair.getJSONObject("workout");

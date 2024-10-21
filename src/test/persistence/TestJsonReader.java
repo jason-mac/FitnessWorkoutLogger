@@ -56,29 +56,19 @@ public class TestJsonReader extends TestJson {
             WeeklyRoutine savedWeeklyRoutineOne = new WeeklyRoutine("Upper Lower");
             WeeklyRoutine savedWeeklyRoutineTwo = new WeeklyRoutine("Push Pull Legs");
             Exercise exercise = new Exercise("Power");
-            Set set = new Set(5.5, 2, Unit.KILOGRAMS);
-            exercise.addSet(set);
+            exercise.addSet(new Set(5.5, 2, Unit.KILOGRAMS));
             savedWorkoutOne.addExercise(exercise);
             savedWorkoutTwo.addExercise(exercise);
-
             savedWeeklyRoutineOne.addWorkout(savedWorkoutOne, Days.MONDAY);
             savedWeeklyRoutineTwo.addWorkout(savedWorkoutTwo, Days.TUESDAY);
-
-            WorkoutLogger workoutLogger = readerWL.readWorkoutLogs();
-            SavedRoutines savedRoutines = readerSR.readSavedRoutines();
-            HashMap<String, Workout> workoutLogs = workoutLogger.getWorkoutLogs();
-            ArrayList<WeeklyRoutine> weeklyRoutines = savedRoutines.getRoutines();
-
+            HashMap<String, Workout> workoutLogs = readerWL.readWorkoutLogs().getWorkoutLogs();
+            ArrayList<WeeklyRoutine> weeklyRoutines = readerSR.readSavedRoutines().getRoutines();
             checkWorkout(savedWorkoutOne, workoutLogs.get("01/01/2001"));
             checkWeeklyRoutine(savedWeeklyRoutineOne, weeklyRoutines.get(0));
             checkWorkout(savedWorkoutTwo, workoutLogs.get("02/01/2001"));
             checkWeeklyRoutine(savedWeeklyRoutineTwo, weeklyRoutines.get(1));
-
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-
-
     }
-
 }

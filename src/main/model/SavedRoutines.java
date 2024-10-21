@@ -68,7 +68,7 @@ public class SavedRoutines implements Writeable {
     private JSONArray savedRoutinesToJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for(WeeklyRoutine weeklyRoutine : savedRoutines) {
+        for (WeeklyRoutine weeklyRoutine : savedRoutines) {
             jsonArray.put(weeklyRoutine.toJson());
         }
 

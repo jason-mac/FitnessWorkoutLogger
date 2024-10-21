@@ -1,5 +1,6 @@
 package persistence;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import model.*;
 import model.Set.Unit;
@@ -16,6 +17,15 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class TestJsonWriter extends TestJson {
+    private SavedRoutines sr;
+    private WorkoutLogger wl;
+
+    @BeforeEach
+    void setup() {
+        sr = new SavedRoutines();
+        wl = new WorkoutLogger();
+    }
+
     @Test
     void testWriterInvalidFile() {
         try {
@@ -28,10 +38,8 @@ public class TestJsonWriter extends TestJson {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptySavedRoutinesWorkoutLogger() {
         try {
-            SavedRoutines sr = new SavedRoutines();
-            WorkoutLogger wl = new WorkoutLogger();
             JsonWriter writerSR = new JsonWriter("./data/testWriterEmptySavedRoutines.json");
             JsonWriter writerWL = new JsonWriter("./data/testWriterEmptyWorkoutLogger.json");
             writerSR.open();
@@ -53,7 +61,7 @@ public class TestJsonWriter extends TestJson {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralSavedRoutinesWorkoutLogger() {
         try {
             WeeklyRoutine weeklyRoutine = new WeeklyRoutine("Upper");
             WeeklyRoutine weeklyRoutine2 = new WeeklyRoutine("Lower");
@@ -71,9 +79,6 @@ public class TestJsonWriter extends TestJson {
             workoutTwo.addExercise(exerciseTwo);
             weeklyRoutine.addWorkout(workoutOne, Days.MONDAY);
             weeklyRoutine2.addWorkout(workoutTwo, Days.TUESDAY);
-
-            SavedRoutines sr = new SavedRoutines();
-            WorkoutLogger wl = new WorkoutLogger();
 
             sr.addRoutine(weeklyRoutine);
             sr.addRoutine(weeklyRoutine2);
@@ -109,5 +114,4 @@ public class TestJsonWriter extends TestJson {
             fail("Exception should not have been thrown");
         }
     }
-
 }
