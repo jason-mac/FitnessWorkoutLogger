@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ public class TestWorkoutLogger {
 
     @Test
     void testConstructor() {
+        assertEquals(0, logger.getWorkoutLogs().size());
         assertEquals(0, logger.getNumWorkoutsLogged());
     }
 
@@ -83,6 +85,7 @@ public class TestWorkoutLogger {
 
     @Test 
     void testGetDates() {
+
         String date = "12/12/2012";
         String dateTwo = "01/01/2001";
         Workout workTwo = new Workout("random");

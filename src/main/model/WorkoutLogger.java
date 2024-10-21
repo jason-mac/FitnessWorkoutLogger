@@ -48,4 +48,8 @@ public class WorkoutLogger {
     public int getNumWorkoutsLogged() {
         return this.workoutLogs.size();
     }
+
+    public HashMap<String, Workout> getWorkoutLogs() {
+        return workoutLogs;
+    }
 }

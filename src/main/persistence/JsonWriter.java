@@ -16,7 +16,7 @@ import java.io.*;
 public class JsonWriter {
 
     // EFFECTS: constructs a writer to write destination to file
-    public JsonWriter() {
+    public JsonWriter(String destination) {
         //stub
     }
 
