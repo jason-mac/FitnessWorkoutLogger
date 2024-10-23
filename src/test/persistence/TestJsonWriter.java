@@ -76,14 +76,8 @@ public class TestJsonWriter extends TestJson {
             WeeklyRoutine weeklyRoutine2 = new WeeklyRoutine("Lower");
             Workout workoutOne = new Workout("Strong");
             Workout workoutTwo = new Workout("Flexibility");
-            Exercise exerciseOne = new Exercise("Bench Press");
-            Exercise exerciseTwo = new Exercise("Leg Raises");
-            Set set = new Set(12.3, 5, Unit.KILOGRAMS);
-            Set setTwo = new Set(32.4, 5, Unit.POUNDS);
-            exerciseOne.addSet(set);
-            exerciseTwo.addSet(setTwo);
-            workoutOne.addExercise(exerciseOne);
-            workoutTwo.addExercise(exerciseTwo);
+            setupTwoWorkouts(workoutOne, workoutTwo);
+
             weeklyRoutine.addWorkout(workoutOne, Days.MONDAY);
             weeklyRoutine2.addWorkout(workoutTwo, Days.TUESDAY);
 
@@ -115,14 +109,7 @@ public class TestJsonWriter extends TestJson {
         try {
             Workout workoutOne = new Workout("Strong");
             Workout workoutTwo = new Workout("Flexibility");
-            Exercise exerciseOne = new Exercise("Bench Press");
-            Exercise exerciseTwo = new Exercise("Leg Raises");
-            Set set = new Set(12.3, 5, Unit.KILOGRAMS);
-            Set setTwo = new Set(32.4, 5, Unit.POUNDS);
-            exerciseOne.addSet(set);
-            exerciseTwo.addSet(setTwo);
-            workoutOne.addExercise(exerciseOne);
-            workoutTwo.addExercise(exerciseTwo);
+            setupTwoWorkouts(workoutOne, workoutTwo);
 
             wl.addWorkout("01/01/2001", workoutOne);
             wl.addWorkout("02/01/2001", workoutTwo);
@@ -144,5 +131,16 @@ public class TestJsonWriter extends TestJson {
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+    }
+
+    private void setupTwoWorkouts(Workout workoutOne, Workout workoutTwo) {
+        Exercise exerciseOne = new Exercise("Bench Press");
+        Exercise exerciseTwo = new Exercise("Leg Raises");
+        Set set = new Set(12.3, 5, Unit.KILOGRAMS);
+        Set setTwo = new Set(32.4, 5, Unit.POUNDS);
+        exerciseOne.addSet(set);
+        exerciseTwo.addSet(setTwo);
+        workoutOne.addExercise(exerciseOne);
+        workoutTwo.addExercise(exerciseTwo);
     }
 }

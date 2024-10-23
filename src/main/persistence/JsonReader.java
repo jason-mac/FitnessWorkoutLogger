@@ -17,7 +17,6 @@ import org.json.*;
  * Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
  */
 
- // TODO: add effects clause to the helper functions
 
 public class JsonReader {
     private String source;
