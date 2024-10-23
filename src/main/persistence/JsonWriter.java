@@ -12,6 +12,7 @@ import java.io.*;
  * Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
  */
 
+
 // Represents a wrtier that writes JSON representation of WorkoutLogger and SavedRoutines to file
 public class JsonWriter {
     private static final int TAB = 4;
@@ -35,7 +36,6 @@ public class JsonWriter {
     public void write(SavedRoutines sr) {
         JSONObject json = sr.toJson();
         saveToFile(json.toString(TAB));
-
     }
 
     // MODIFIES: this
@@ -56,5 +56,4 @@ public class JsonWriter {
     private void saveToFile(String json) {
         writer.print(json);
     }
-    
 }

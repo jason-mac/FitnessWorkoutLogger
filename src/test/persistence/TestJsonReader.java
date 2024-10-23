@@ -33,13 +33,10 @@ public class TestJsonReader extends TestJson {
     }
 
     @Test
-    void testReaderEmptyWorkoutLoggerSavedRoutines() {
-        JsonReader readerWL = new JsonReader("./data/testReaderEmptyWorkoutLogger.json");
+    void testReaderEmptySavedRoutines() {
         JsonReader readerSR = new JsonReader("./data/testReaderEmptySavedRoutines.json");
         try {
-            WorkoutLogger workoutLogger = readerWL.readWorkoutLogs();
             SavedRoutines savedRoutines = readerSR.readSavedRoutines();
-            assertEquals(0, workoutLogger.getNumWorkoutsLogged());
             assertEquals(0, savedRoutines.getNumRoutinesStored());
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -47,8 +44,37 @@ public class TestJsonReader extends TestJson {
     }
 
     @Test
-    void testReaderGeneralWorkoutLoggerSavedRoutines() {
+    void testReaderEmptyWorkoutLogger() {
+        JsonReader readerWL = new JsonReader("./data/testReaderEmptyWorkoutLogger.json");
+        try {
+            WorkoutLogger workoutLogger = readerWL.readWorkoutLogs();
+            assertEquals(0, workoutLogger.getNumWorkoutsLogged());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderGeneralWorkoutLogger() {
         JsonReader readerWL = new JsonReader("./data/testReaderGeneralWorkoutLogger.json");
+        try {
+            Workout savedWorkoutOne = new Workout("Name");
+            Workout savedWorkoutTwo = new Workout("Name2");
+            Exercise exercise = new Exercise("Power");
+            exercise.addSet(new Set(5.5, 2, Unit.KILOGRAMS));
+            savedWorkoutOne.addExercise(exercise);
+            savedWorkoutTwo.addExercise(exercise);
+            HashMap<String, Workout> workoutLogs = readerWL.readWorkoutLogs().getWorkoutLogs();
+            checkWorkout(savedWorkoutOne, workoutLogs.get("01/01/2001"));
+            checkWorkout(savedWorkoutTwo, workoutLogs.get("02/01/2001"));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+
+    }
+
+    @Test
+    void testReaderGeneralSavedRoutines() {
         JsonReader readerSR = new JsonReader("./data/testReaderGeneralSavedRoutines.json");
         try {
             Workout savedWorkoutOne = new Workout("Name");
@@ -61,11 +87,8 @@ public class TestJsonReader extends TestJson {
             savedWorkoutTwo.addExercise(exercise);
             savedWeeklyRoutineOne.addWorkout(savedWorkoutOne, Days.MONDAY);
             savedWeeklyRoutineTwo.addWorkout(savedWorkoutTwo, Days.TUESDAY);
-            HashMap<String, Workout> workoutLogs = readerWL.readWorkoutLogs().getWorkoutLogs();
             ArrayList<WeeklyRoutine> weeklyRoutines = readerSR.readSavedRoutines().getRoutines();
-            checkWorkout(savedWorkoutOne, workoutLogs.get("01/01/2001"));
             checkWeeklyRoutine(savedWeeklyRoutineOne, weeklyRoutines.get(0));
-            checkWorkout(savedWorkoutTwo, workoutLogs.get("02/01/2001"));
             checkWeeklyRoutine(savedWeeklyRoutineTwo, weeklyRoutines.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");

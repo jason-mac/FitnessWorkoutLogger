@@ -17,6 +17,8 @@ import org.json.*;
  * Source: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
  */
 
+ // TODO: add effects clause to the helper functions
+
 public class JsonReader {
     private String source;
 
@@ -33,7 +35,7 @@ public class JsonReader {
         return parseWorkoutLogger(jsonObject);
     }
 
-    // EFFECTS: reads savedRoutines files and returns it
+    // EFFECTS: reads savedRoutines from files and returns it
     //          throws IOexception if an error occurs reading data
     public SavedRoutines readSavedRoutines() throws IOException {
         String jsonData = readFile(source);
@@ -41,6 +43,7 @@ public class JsonReader {
         return parseSavedRoutines(jsonObject);
     }
 
+    // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contenBuilder = new StringBuilder();
 
@@ -59,6 +62,8 @@ public class JsonReader {
         return sr;
     }
 
+    // MODIFIES: sr
+    // EFFECTS: parses weekly routines from JSON object and adds them to saved routines
     private void addRoutines(SavedRoutines sr, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("savedRoutines");
         for (Object json : jsonArray) {
@@ -67,6 +72,8 @@ public class JsonReader {
         }
     } 
 
+    // MODIFIES: sr
+    // EFFECTS: parses weekly routine from JSON object and adds it to saved routines
     private void addRoutine(SavedRoutines sr, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
 
@@ -79,6 +86,8 @@ public class JsonReader {
         sr.addRoutine(weeklyRoutine);
     }
 
+    // MODIFIES: weeklyRoutine
+    // EFFECTS: parses day/workouts key value pairs from json object and adds them to weekly routine
     private void addWorkoutDayPair(WeeklyRoutine weeklyRoutine, JSONObject jsonObject) {
         Days day = Days.valueOf(jsonObject.getString("day"));
         JSONObject workoutJsonData = jsonObject.getJSONObject("workout");
@@ -86,6 +95,7 @@ public class JsonReader {
         weeklyRoutine.addWorkout(workout, day);
     }
 
+    // EFFECTS: parses a workout from json object and returns it as workout object
     private Workout jsonToWorkout(JSONObject jsonObject) {
         JSONArray jsonExercisesArray = jsonObject.getJSONArray("exercises");
         String name = jsonObject.getString("name");
@@ -97,7 +107,7 @@ public class JsonReader {
         return workout;
     }
 
-    // MODIFIES: exercise
+    // MODIFIES: workout 
     // EFFECTS: parses exercise from json object and adds it to workout 
     private void addExercise(Workout workout, JSONObject jsonObject) {
         JSONArray jsonSetsArray = jsonObject.getJSONArray("sets");
@@ -111,7 +121,7 @@ public class JsonReader {
     }
 
     // MODIFIES: exercise
-    // EFFECTS: parses set from json object and adds it to exercises
+    // EFFECTS: parses sets from json object and adds it to exercise
     private void addSet(Exercise exercise, JSONObject jsonObject) {
         double weight = jsonObject.getDouble("weight");
         int repCount = jsonObject.getInt("repCount");
@@ -128,7 +138,7 @@ public class JsonReader {
 
     
     // MODIFIES: wl 
-    // EFFECTS: parses workouts from json object and adds them to workout logger 
+    // EFFECTS: parses date/workout pairs from json object and adds them to workout logger 
     private void addWorkouts(WorkoutLogger wl, JSONObject jsonObject) {
         JSONArray jsonDateWorkoutPairs = jsonObject.getJSONArray("workoutLogs");
         for (Object json : jsonDateWorkoutPairs) {

@@ -118,6 +118,8 @@ public class WeeklyRoutine implements Writeable  {
         return json;
     }
 
+    // EFFECTS: returns weekly routine as a json array with json objects
+    //          containing the day/workout key value pair
     private JSONArray routinesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Days day : routine.keySet()) {

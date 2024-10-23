@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 
 public class TestJson {
-    protected void checkWorkout(Workout other, Workout workout) {
-        assertTrue(other.equals(workout));
+    protected void checkWorkout(Workout workout, Workout other) {
+        assertTrue(workout.equals(other));
     }
 
-    protected void checkWeeklyRoutine(WeeklyRoutine other, WeeklyRoutine weeklyRoutine) {
-        assertTrue(other.equals(weeklyRoutine));
+    protected void checkWeeklyRoutine(WeeklyRoutine weeklyRoutine, WeeklyRoutine other) {
+        assertTrue(weeklyRoutine.equals(other));
     }
 }
 

@@ -149,8 +149,8 @@ public class TestExercise {
         Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
         
         exercise1.addSet(set1);
-        exercise2.addSet(new Set(60.0, 10, Set.Unit.KILOGRAMS)); // One set
-        exercise2.addSet(new Set(70.0, 10, Set.Unit.KILOGRAMS)); // More sets
+        exercise2.addSet(new Set(60.0, 10, Set.Unit.KILOGRAMS));
+        exercise2.addSet(new Set(70.0, 10, Set.Unit.KILOGRAMS));
 
         assertFalse(exercise1.equals(exercise2));
     }
@@ -226,8 +226,8 @@ public class TestExercise {
         Set set1 = new Set(50.0, 10, Set.Unit.KILOGRAMS);
         
         exercise1.addSet(set1);
-        exercise2.addSet(new Set(60.0, 10, Set.Unit.KILOGRAMS)); // One set
-        exercise2.addSet(new Set(70.0, 10, Set.Unit.KILOGRAMS)); // More sets
+        exercise2.addSet(new Set(60.0, 10, Set.Unit.KILOGRAMS)); 
+        exercise2.addSet(new Set(70.0, 10, Set.Unit.KILOGRAMS));
 
         assertNotEquals(exercise1.hashCode(), exercise2.hashCode());
     }

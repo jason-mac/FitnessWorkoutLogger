@@ -38,22 +38,15 @@ public class TestJsonWriter extends TestJson {
     }
 
     @Test
-    void testWriterEmptySavedRoutinesWorkoutLogger() {
+    void testWriterEmptyWorkoutLogger() {
         try {
-            JsonWriter writerSR = new JsonWriter("./data/testWriterEmptySavedRoutines.json");
             JsonWriter writerWL = new JsonWriter("./data/testWriterEmptyWorkoutLogger.json");
-            writerSR.open();
             writerWL.open();
-            writerSR.write(sr);
             writerWL.write(wl);
-            writerSR.close();
             writerWL.close();
 
-            JsonReader readerSR = new JsonReader("./data/testWriterEmptySavedRoutines.json");
             JsonReader readerWL = new JsonReader("./data/testWriterEmptyWorkoutLogger.json");
-            sr = readerSR.readSavedRoutines();
             wl = readerWL.readWorkoutLogs();
-            assertEquals(0, sr.getNumRoutinesStored());
             assertEquals(0, wl.getNumWorkoutsLogged());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -61,7 +54,23 @@ public class TestJsonWriter extends TestJson {
     }
 
     @Test
-    void testWriterGeneralSavedRoutinesWorkoutLogger() {
+    void testWriterEmptySavedRoutines() {
+        try {
+            JsonWriter writerSR = new JsonWriter("./data/testWriterEmptySavedRoutines.json");
+            writerSR.open();
+            writerSR.write(sr);
+            writerSR.close();
+
+            JsonReader readerSR = new JsonReader("./data/testWriterEmptySavedRoutines.json");
+            sr = readerSR.readSavedRoutines();
+            assertEquals(0, sr.getNumRoutinesStored());
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testWriterGeneralSavedRoutines() {
         try {
             WeeklyRoutine weeklyRoutine = new WeeklyRoutine("Upper");
             WeeklyRoutine weeklyRoutine2 = new WeeklyRoutine("Lower");
@@ -71,8 +80,6 @@ public class TestJsonWriter extends TestJson {
             Exercise exerciseTwo = new Exercise("Leg Raises");
             Set set = new Set(12.3, 5, Unit.KILOGRAMS);
             Set setTwo = new Set(32.4, 5, Unit.POUNDS);
-
-
             exerciseOne.addSet(set);
             exerciseTwo.addSet(setTwo);
             workoutOne.addExercise(exerciseOne);
@@ -82,34 +89,58 @@ public class TestJsonWriter extends TestJson {
 
             sr.addRoutine(weeklyRoutine);
             sr.addRoutine(weeklyRoutine2);
+
+            JsonWriter writerSR = new JsonWriter("./data/testWriterGeneralSavedRoutines.json");
+            writerSR.open();
+            writerSR.write(sr);
+            writerSR.close();
+
+            JsonReader readerSR = new JsonReader("./data/testWriterGeneralSavedRoutines.json");
+            sr = readerSR.readSavedRoutines();
+
+            ArrayList<WeeklyRoutine> routinesFromFile = sr.getRoutines();
+
+            assertEquals(2, routinesFromFile.size());
+
+            checkWeeklyRoutine(weeklyRoutine, routinesFromFile.get(0));
+            checkWeeklyRoutine(weeklyRoutine2, routinesFromFile.get(1));
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+
+    }
+
+    @Test
+    void testWriterGeneralWorkoutLogger() {
+        try {
+            Workout workoutOne = new Workout("Strong");
+            Workout workoutTwo = new Workout("Flexibility");
+            Exercise exerciseOne = new Exercise("Bench Press");
+            Exercise exerciseTwo = new Exercise("Leg Raises");
+            Set set = new Set(12.3, 5, Unit.KILOGRAMS);
+            Set setTwo = new Set(32.4, 5, Unit.POUNDS);
+            exerciseOne.addSet(set);
+            exerciseTwo.addSet(setTwo);
+            workoutOne.addExercise(exerciseOne);
+            workoutTwo.addExercise(exerciseTwo);
+
             wl.addWorkout("01/01/2001", workoutOne);
             wl.addWorkout("02/01/2001", workoutTwo);
 
-            JsonWriter writerSR = new JsonWriter("./data/testWriterGeneralSavedRoutines.json");
             JsonWriter writerWL = new JsonWriter("./data/testWriterGeneralWorkoutLogger.json");
-            writerSR.open();
             writerWL.open();
-            writerSR.write(sr);
             writerWL.write(wl);
-            writerSR.close();
             writerWL.close();
 
-            JsonReader readerSR = new JsonReader("./data/testWriterGeneralSavedRoutines.json");
             JsonReader readerWL = new JsonReader("./data/testWriterGeneralWorkoutLogger.json");
-            sr = readerSR.readSavedRoutines();
             wl = readerWL.readWorkoutLogs();
 
-            HashMap<String, Workout> workoutLogs = wl.getWorkoutLogs();
-            ArrayList<WeeklyRoutine> routines = sr.getRoutines();
+            HashMap<String, Workout> workoutLogsFromFile = wl.getWorkoutLogs();
 
-            assertEquals(2, workoutLogs.size());
-            assertEquals(2, routines.size());
+            assertEquals(2, workoutLogsFromFile.size());
 
-            checkWorkout(workoutOne, workoutLogs.get("01/01/2001"));
-            checkWorkout(workoutTwo, workoutLogs.get("02/01/2001"));
-            checkWeeklyRoutine(weeklyRoutine, routines.get(0));
-            checkWeeklyRoutine(weeklyRoutine2, routines.get(1));
-
+            checkWorkout(workoutOne, workoutLogsFromFile.get("01/01/2001"));
+            checkWorkout(workoutTwo, workoutLogsFromFile.get("02/01/2001"));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

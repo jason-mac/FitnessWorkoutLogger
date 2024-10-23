@@ -65,6 +65,7 @@ public class SavedRoutines implements Writeable {
         return json;
     }
 
+    // EFFECTS: returns weekly routines in this savedRoutines as a Json Array
     private JSONArray savedRoutinesToJson() {
         JSONArray jsonArray = new JSONArray();
 

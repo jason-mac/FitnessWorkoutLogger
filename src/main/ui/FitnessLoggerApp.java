@@ -5,6 +5,7 @@ import model.Set.Unit;
 import model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 
 
 import persistence.JsonReader;
@@ -17,6 +18,7 @@ import java.io.IOException;
 * Heavy Influence from TellerApp.java through out the code
 * Source: https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 */
+
 
 // UI application where a user can store log workouts, create workout plans, and as well as view/delete these 
 // workouts as needed
@@ -51,10 +53,10 @@ public class FitnessLoggerApp {
         this.input = new Scanner(System.in);
         this.workoutLogs = new WorkoutLogger();
         this.savedRoutines = new SavedRoutines();
-        writerWorkoutLogs = new JsonWriter(JSON_STORE_WORKOUTLOGS);
-        readerWorkoutLogs = new JsonReader(JSON_STORE_WORKOUTLOGS);
-        writerSavedRoutines = new JsonWriter(JSON_STORE_SAVED_ROUTINES);
-        readerSavedRoutines = new JsonReader(JSON_STORE_SAVED_ROUTINES);
+        this.writerWorkoutLogs = new JsonWriter(JSON_STORE_WORKOUTLOGS);
+        this.readerWorkoutLogs = new JsonReader(JSON_STORE_WORKOUTLOGS);
+        this.writerSavedRoutines = new JsonWriter(JSON_STORE_SAVED_ROUTINES);
+        this.readerSavedRoutines = new JsonReader(JSON_STORE_SAVED_ROUTINES);
     }
 
     // EFFECTS: displays a menu for user to interact with program
@@ -72,7 +74,9 @@ public class FitnessLoggerApp {
         System.out.println();
     }
 
+    // MODIFIES: this
     // EFFECTS: process user input and branches code out to corresponding input
+    @SuppressWarnings("methodlength")
     private void processUserInput(String userInput) {
         switch (userInput) {
             case "p":
@@ -99,8 +103,11 @@ public class FitnessLoggerApp {
             case "d":
                 deleteWeeklyRoutine();
                 break;
-            default:
+            case "q":
                 running = false;
+                break;
+            default:
+                System.out.println("Invalid Input");
                 break;
         }
     }
@@ -117,7 +124,8 @@ public class FitnessLoggerApp {
         System.out.println("Which date would you like to view a workout from (type in 'list' for possible dates): ");
         String userInput = input.nextLine();
         if (userInput.equals("list")) {
-            for (String date : this.workoutLogs.getDates()) {
+            ArrayList<String> sortedDates = sortedDates();
+            for (String date : sortedDates) {
                 System.out.println("\t-" + date);
             }
             userInput = input.nextLine();
@@ -133,6 +141,16 @@ public class FitnessLoggerApp {
         System.out.println("Which units would you like to view your workout in (lbs or kg): ");
         Unit unit = input.nextLine().equals("kg") ? Unit.KILOGRAMS : Unit.POUNDS;
         printWorkoutInformation(workout, unit);
+    }
+
+    // EFFECTS: returns a sorted array list of the dates in the workout logs
+    private ArrayList<String> sortedDates() {
+        ArrayList<String> sortedDates = new ArrayList<>();
+        for (String date : workoutLogs.getDates()) {
+            sortedDates.add(date);
+        }
+        Collections.sort(sortedDates);
+        return sortedDates;
     }
 
     // MODIFES: this
@@ -412,7 +430,7 @@ public class FitnessLoggerApp {
         return new Set(weight, repCount, unit);
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves savedRoutines and workoutLogs to file
     private void saveLogsAndRoutines() {
         try {
             writerSavedRoutines.open();
