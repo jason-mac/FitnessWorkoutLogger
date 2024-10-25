@@ -13,7 +13,7 @@ import java.io.*;
  */
 
 
-// Represents a wrtier that writes JSON representation of WorkoutLogger and SavedRoutines to file
+// Represents a writer that writes JSON representation of WorkoutLogger and SavedRoutines to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

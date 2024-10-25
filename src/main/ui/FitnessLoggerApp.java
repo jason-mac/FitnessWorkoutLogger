@@ -68,9 +68,9 @@ public class FitnessLoggerApp {
         System.out.println("\tc -> Create Weekly Routine");
         System.out.println("\tv -> View Weekly Routine");
         System.out.println("\td -> Delete Weekly Routine");
-        System.out.println("\tsave -> save your workout logs and saved routines to file");
-        System.out.println("\tload -> load your saved workout logs and saved routines from file");
-        System.out.println("\tq (or any key except for those above) -> quit");
+        System.out.println("\tsave -> Save your workout logs and saved routines to file");
+        System.out.println("\tload -> Load your saved workout logs and saved routines from file");
+        System.out.println("\tq -> quit");
         System.out.println();
     }
 

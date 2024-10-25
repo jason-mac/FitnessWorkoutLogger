@@ -18,6 +18,7 @@ import org.json.*;
  */
 
 
+// Represents a reader that reads JSON representation of WorkoutLogger and SavedRoutines from file
 public class JsonReader {
     private String source;
 
