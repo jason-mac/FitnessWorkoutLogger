@@ -1,6 +1,17 @@
 package ui.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Observer;
+
 import javax.swing.*;
+
+import model.WorkoutLogger;
+import persistence.DataPersistence;
+import ui.gui.components.*;
 
 /*
  * SOURCE CREDITS
@@ -14,10 +25,30 @@ import javax.swing.*;
  * 
  */
 public class FitnessLoggerAppGui extends JFrame {
+    private static final String JSON_STORE_DATA = "./data/dataPersistence.json";
+    private static final int WIDTH = 933;
+    private static final int HEIGHT = 740;
+    protected WorkoutLogger workoutLogger;
+    protected DataPersistence dataPersistence;
+
 
     // EFFECTS: Creates an instance of the FitenssLoggerAppGui
     //          and instantiates appropiate fields for GUI and runs the JFrame
     public FitnessLoggerAppGui() {
-        // stub
+        this.dataPersistence = new DataPersistence(JSON_STORE_DATA);
+        this.workoutLogger = new WorkoutLogger();
+
+        initFrame();
+
+
+
+        setVisible(true);
+    }
+
+    private void initFrame() {
+        setTitle("Fitness Logger App");
+        setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
