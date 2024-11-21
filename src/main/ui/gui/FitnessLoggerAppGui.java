@@ -30,6 +30,7 @@ public class FitnessLoggerAppGui extends JFrame {
     private static final int HEIGHT = 740;
     protected WorkoutLogger workoutLogger;
     protected DataPersistence dataPersistence;
+    protected TabbedPanes tabbedPanes;
 
 
     // EFFECTS: Creates an instance of the FitenssLoggerAppGui
@@ -40,6 +41,7 @@ public class FitnessLoggerAppGui extends JFrame {
         this.workoutLogger = new WorkoutLogger();
 
         initFrame();
+        initTabbedPanes();
 
 
 
@@ -56,6 +58,12 @@ public class FitnessLoggerAppGui extends JFrame {
         setJMenuBar(new MenuBar(this));
     }
 
+    // MODIFIES: this
+    // EFFECTS: Instantiates tabbedPanes
+    private void initTabbedPanes() {
+        tabbedPanes = new TabbedPanes(this);
+    }
+
 
     // EFFECTS: saves the workoutLogger data into Json
     public void save() throws FileNotFoundException {
@@ -66,7 +74,13 @@ public class FitnessLoggerAppGui extends JFrame {
     // EFFECTS: loads workoutLogger from JSon
     public void load() throws IOException {
         this.workoutLogger = dataPersistence.load();
-        //tabbedPanes.refreshTabs();
+        tabbedPanes.refreshTabs();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes workout from logger at given date
+    public void removeWorkoutAtDate(String date) {
+        workoutLogger.removeWorkout(date);
     }
 
     public WorkoutLogger getWorkoutLogger() {

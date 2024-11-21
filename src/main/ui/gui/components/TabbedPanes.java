@@ -1,10 +1,7 @@
 package ui.gui.components;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 
 
-import java.awt.Font;
 import ui.gui.FitnessLoggerAppGui;
 import ui.gui.components.tabs.*;
 
@@ -26,7 +23,7 @@ public class TabbedPanes extends JTabbedPane {
     // EFFECTS: Initializes the panels data members for each tab
     private void initPanels() {
         addWorkoutTab = new AddWorkoutTab();
-        displayWorkoutTab = new DisplayWorkoutTab();
+        displayWorkoutTab = new DisplayWorkoutTab(fitnessLoggerAppGui);
         filterWorkoutTab = new FilterWorkoutTab();
     }
 
@@ -37,4 +34,11 @@ public class TabbedPanes extends JTabbedPane {
         addTab("Display Workout", null, displayWorkoutTab, "Delete a workout");
         addTab("Filter Workout", null, filterWorkoutTab, "View your workouts with filering");
     } 
+
+    // MODIFIES: this
+    // EFFECTS: When user decides to select a different workout to display, or loads application
+    //          this function will refresh all of the tabs to accomodate the changes
+    public void refreshTabs() {
+        displayWorkoutTab.refresh();
+    }
 }
