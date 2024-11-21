@@ -18,4 +18,33 @@ I chose this project because I frequent the gym myself, but I've often found it 
 
 - As a user, I want to be able to save my workout logs and created weekly routines to file if I choose to do so 
 
-- As a user, I want to be able to be able to load  workout logs and created weekly routines from file if choose to do so 
+- As a user, I want to be able to be able to load workout logs and created weekly routines from file if choose to do so 
+
+- As a user, I want to be able to delete logged workouts from my logger
+
+# Instructions for End User
+
+- You can generate the first required action related to the user story of "adding multiple X's to a Y" by selecting the tabbed pane labbelled, "Add Workout", you will then be prompted to create a logged Workout and can then add it to the Workout Logger. You will be prompted to do the following:
+    1) Insert a date for the workout
+    2) Insert number of exercises performed
+    3) Insert name for each exercise
+    4) Insert number of sets performed for each exercises
+    5) Insert data for each set 
+
+- You can generate the second required action related to the user story of "Displaying all X's that have been added to Y" by selecting the tabbed pane labelled, "Display Workout". It will take you to a new panel, to which on the left there will be a selection of dates to which you can select, and then your workout data for that date will be displayed. Additionally, there is the option to view your workout data in either Kilograms or Pounds by selectiong the radio buttons on the bottom right of the application labelled "Kilograms" and "Pounds" accordingly.
+
+- You can generate the first related action of "Deleting a logged workout from the workout logger" by selecting on the tabbed pane labelled, "Display Workout". Select the date on the left for which workout you would like to remove from the workout logger. On the bottom left of the application there will be a button labelled, "Delete". Click on delete once you have selected the workout you would like to delete. Once done, the workout will be removed from your logger.
+
+- You can generate the second related action of "Filtering Workouts" by selecting the tabbed pane labelled, "Filter Workouts". In this panel, there will be options to filter your worksouts by the following:
+    1)  By Date 
+        * Oldeset to newest, or newest to oldest
+        * Only show workouts before this date, or after this date
+    2) By Workout Volume 
+        * Highest to lowest, or lowest to highest
+        * Only show workouts with lower volume or higher volume 
+
+- You can find the visual component by starting the application and there will be a splash screen pop up with a picture of a barbell 
+
+- You can save the state of the application to file by clicking "File" in the menu bar and then selecting "Save" in the drop down menu 
+
+- You can reload the state of the application from file by clicking "File" in the menu bar and then selecting "Load" in the drop down menu 
