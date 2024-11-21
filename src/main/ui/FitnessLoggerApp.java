@@ -10,6 +10,7 @@ public class FitnessLoggerApp {
     private FitnessLoggerAppCli fitnessLoggerAppCli;
     private FitnessLoggerAppGui fitnessLoggerAppGui;
 
+    // EFFECTS: prompts user to choose to run cli or gui
     public void run() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Gui or Cli, type here: ");
@@ -24,11 +25,13 @@ public class FitnessLoggerApp {
         } 
     }
 
+    // EFFECTS: runs cli application
     public void runCli() throws Exception {
         fitnessLoggerAppCli = new FitnessLoggerAppCli();
         fitnessLoggerAppCli.run();
     }
 
+    // EFFECTS: runs gui application
     public void runGui() {
         fitnessLoggerAppGui = new FitnessLoggerAppGui();
     }

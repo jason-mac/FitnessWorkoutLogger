@@ -46,10 +46,28 @@ public class FitnessLoggerAppGui extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: Initializes this frame's size and title 
     private void initFrame() {
         setTitle("Fitness Logger App");
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setJMenuBar(new MenuBar(this));
+    }
+
+
+    // EFFECTS: saves the workoutLogger data into Json
+    public void save() throws FileNotFoundException {
+        this.dataPersistence.save(workoutLogger);
+    }
+
+    // EFFECTS: loads workoutLogger from JSon
+    public void load() throws IOException {
+        this.workoutLogger = dataPersistence.load();
+        //tabbedPanes.refreshTabs();
+    }
+
+    public WorkoutLogger getWorkoutLogger() {
+        return this.workoutLogger;
     }
 }
