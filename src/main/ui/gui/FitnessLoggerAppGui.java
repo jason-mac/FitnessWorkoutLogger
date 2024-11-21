@@ -46,6 +46,7 @@ public class FitnessLoggerAppGui extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: Initializes this frame's size and title 
     private void initFrame() {
         setTitle("Fitness Logger App");
@@ -61,6 +62,7 @@ public class FitnessLoggerAppGui extends JFrame {
         this.dataPersistence.save(workoutLogger);
     }
 
+    // MODIFIES: this
     // EFFECTS: loads workoutLogger from JSon
     public void load() throws IOException {
         this.workoutLogger = dataPersistence.load();

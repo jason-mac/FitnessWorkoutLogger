@@ -10,6 +10,7 @@ public class ProgressBar extends JProgressBar {
         setStringPainted(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: runs the progress bar, upon reaching 100% displays the endMessage
     public void fill(String endMessage) {
         setString(null);

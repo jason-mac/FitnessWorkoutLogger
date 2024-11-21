@@ -41,6 +41,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         this.add(fileMenu);
     }
 
+    // MODIFIES: this
     // EFFECTS: Gives the fileMenu a title and adds components
     private void initFileMenu() {
         this.fileMenu = new JMenu("File");
@@ -49,11 +50,13 @@ public class MenuBar extends JMenuBar implements ActionListener {
         fileMenu.add(exitItem);
     }
 
+    // MODIFIES: this
     // EFFECTS: Initializes bar to a new ProgressBar
     private void initBar() {
         this.bar = new ProgressBar();
     }
 
+    // MODIFIES: this
     // EFFECTS: Creates a dialog menu such that the user cannot 
     //          close it or intereact with the application
     //          until the "ProgressBar" is finished with its
@@ -66,6 +69,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }
 
+    // MODIFIES: this
     // EFFECTS: initalizes saveItem to a JMenuItem inteded for the saving functionality
     private void initSaveItem() {
         ImageIcon image = new ImageIcon(getClass().getResource("/resources/icons/Save_Icon.png"));
@@ -73,12 +77,14 @@ public class MenuBar extends JMenuBar implements ActionListener {
         saveItem.addActionListener(this);
     }
 
+    // MODIFIES: this
     // EFFECTS: initalizes saveItem to a JMenuItem inteded for the loading functionality
     private void initLoadItem() {
         this.loadItem = new JMenuItem("Load", new ImageIcon(getClass().getResource("/resources/icons/Load_Icon.png")));
         this.loadItem.addActionListener(this);
     }
 
+    // MODIFIES: this
     // EFFECTS: initalizes saveItem to a JMenuItem inteded for the exiting functionality
     private void initExitItem() {
         this.exitItem = new JMenuItem("Exit", new ImageIcon(getClass().getResource("/resources/icons/Exit_Icon.png")));
@@ -132,6 +138,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         dialog.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: handles loading the application from file
     // if cannot be loaded user is prompted with window stating as such
     private void handleLoadItemAction() {

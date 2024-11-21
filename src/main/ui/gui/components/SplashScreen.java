@@ -30,6 +30,7 @@ public class SplashScreen extends JWindow {
         setLocationRelativeTo(null);
     }
 
+    // MODIFIES: this
     // EFFECTS: Splash screen is run, and then disposed upon 
     //          the progress bar finishing
     private void runSplashScreen() {
