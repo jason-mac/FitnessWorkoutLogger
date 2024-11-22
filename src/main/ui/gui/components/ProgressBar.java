@@ -3,9 +3,16 @@ package ui.gui.components;
 import javax.swing.*;
 
 public class ProgressBar extends JProgressBar {
+    private int milliSeconds;
 
+    public ProgressBar(int milliSeconds) {
+        this.milliSeconds = milliSeconds;
+        setVisible(true);
+        setStringPainted(true);
+    }
     // EFFECTS: sets the progress bar to be visible with the string painted to true
     public ProgressBar() {
+        milliSeconds = 35;
         setVisible(true);
         setStringPainted(true);
     }
@@ -18,7 +25,7 @@ public class ProgressBar extends JProgressBar {
         for (int i = 0; i <= 105; i++) {
             if (i <= 100) {
                 try {
-                    Thread.sleep(25);
+                    Thread.sleep(milliSeconds);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

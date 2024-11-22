@@ -27,6 +27,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 import model.*;
+import model.Set.Unit;
 import ui.gui.FitnessLoggerAppGui;
 
 // Class that handles the displaying workouts in a JPanel 
@@ -247,11 +248,18 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
                 addExerciseToTable(exercise);
                 data.add(getEmptyRow());
             }
-
-            if(data.size() != 0) {
-                data.remove(data.size() - 1);
-            }
+            data.add(workoutVolumeRow(workout));
             fireTableDataChanged();
+        }
+
+        public List<String> workoutVolumeRow(Workout workout) {
+            List<String> workoutVolumeRow = new ArrayList<>();
+            Unit unit = kilograms.isSelected() ? Unit.KILOGRAMS : Unit.POUNDS;
+            workoutVolumeRow.add("Total Workout Volume: ");
+            workoutVolumeRow.add(String.valueOf(workout.getVolume(unit)));
+            workoutVolumeRow.add("");
+            workoutVolumeRow.add("");
+            return workoutVolumeRow;
         }
 
         // EFFECTS: returns empty row for spacing

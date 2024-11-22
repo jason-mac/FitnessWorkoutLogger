@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import model.*;
 import model.Set.Unit;
@@ -29,6 +30,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import ui.gui.FitnessLoggerAppGui;
+import ui.gui.components.ProgressBar;
 
 // Class that handles the AddWorkoutTab part of TabbedPanes (Add X to Y function)
 public class AddWorkoutTab extends JPanel implements ActionListener {
@@ -93,6 +95,31 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         }
         fitnessLoggerAppGui.getWorkoutLogger().addWorkout(dateField.getText(), workoutToAdd);
         fitnessLoggerAppGui.refresh();
+        notifyUser();
+    }
+
+    private void notifyUser() {
+        JDialog dialog = new JDialog(fitnessLoggerAppGui, true);
+        ProgressBar progressBar = new ProgressBar(20);
+        dialog.setSize(400, 200);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.setLocationRelativeTo(fitnessLoggerAppGui);
+        dialog.setTitle("Adding workout to logger...");
+        dialog.add(progressBar);
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                progressBar.fill("Workout Successfully Added!");
+                return null;
+            }
+
+            protected void done() {
+                dialog.dispose();
+            }
+        };
+        worker.execute();
+        dialog.setVisible(true);
     }
 
     // MODIFIES: this
@@ -284,8 +311,18 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
 
     // EFFECTS: returns true of the num string is valid number
     private boolean isValidNum(String num) {
-        if(num == null || num.length() != 1 || !Character.isDigit(num.charAt(0)))  {
+        if(num == null || num.length() == 0 || !isPositiveInteger(num))  {
             return false;
+        }
+        return true;
+    }
+
+    // EFFECTS: checks if string has the form of a positive integer
+    private boolean isPositiveInteger(String str) {
+        for(char c : str.toCharArray()) {
+            if(!Character.isDigit(c)) {
+                return false;
+            }
         }
         return true;
     }

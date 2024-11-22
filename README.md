@@ -45,6 +45,15 @@ I chose this project because I frequent the gym myself, but I've often found it 
 
 - You can find the visual component by starting the application and there will be a splash screen pop up with a picture of a barbell 
 
+- You can find another visual component in the tab labelled, "Add Workout" by doing the following 
+    1) Insert a date NOT in the format, (yyyy/mm/dd) and hitting enter
+    2) Insert a value for number of exercises that is NOT a valid positive integer and hitting enter
+        - Upon doing so, a red "X" mark will appear to the right of the text field 
+        - Conversely you can also do the following: 
+    3) Insert a date CORRECTLY in the format, (yyyy/mm/dd) and hitting enter
+    4) Insert a value for number of exercises that IS a valid positive integer and hitting enter
+        -  Upon doing so, a green "check mark" will appear to the right of the text field
+
 - You can save the state of the application to file by clicking "File" in the menu bar and then selecting "Save" in the drop down menu 
 
 - You can reload the state of the application from file by clicking "File" in the menu bar and then selecting "Load" in the drop down menu 
