@@ -22,7 +22,7 @@ public class TabbedPanes extends JTabbedPane {
 
     // EFFECTS: Initializes the panels data members for each tab
     private void initPanels() {
-        addWorkoutTab = new AddWorkoutTab();
+        addWorkoutTab = new AddWorkoutTab(fitnessLoggerAppGui);
         displayWorkoutTab = new DisplayWorkoutTab(fitnessLoggerAppGui);
         filterWorkoutTab = new FilterWorkoutTab();
     }
@@ -40,5 +40,6 @@ public class TabbedPanes extends JTabbedPane {
     //          this function will refresh all of the tabs to accomodate the changes
     public void refreshTabs() {
         displayWorkoutTab.refresh();
+        addWorkoutTab.refresh();
     }
 }

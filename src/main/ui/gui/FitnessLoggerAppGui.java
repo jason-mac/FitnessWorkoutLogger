@@ -36,7 +36,7 @@ public class FitnessLoggerAppGui extends JFrame {
     // EFFECTS: Creates an instance of the FitenssLoggerAppGui
     //          and instantiates appropiate fields for GUI and runs the JFrame
     public FitnessLoggerAppGui() {
-        new SplashScreen();
+        //new SplashScreen();
         this.dataPersistence = new DataPersistence(JSON_STORE_DATA);
         this.workoutLogger = new WorkoutLogger();
 
@@ -44,7 +44,7 @@ public class FitnessLoggerAppGui extends JFrame {
         initTabbedPanes();
 
 
-
+        add(tabbedPanes);
         setVisible(true);
     }
 
@@ -74,6 +74,10 @@ public class FitnessLoggerAppGui extends JFrame {
     // EFFECTS: loads workoutLogger from JSon
     public void load() throws IOException {
         this.workoutLogger = dataPersistence.load();
+        refresh();
+    }
+
+    public void refresh() {
         tabbedPanes.refreshTabs();
     }
 
