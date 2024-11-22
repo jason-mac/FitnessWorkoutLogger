@@ -9,5 +9,11 @@
         "lib/**/*.jar"
     ],
     "java.checkstyle.configuration": "${workspaceFolder}/checkstyle.xml",
-    "java.checkstyle.version": "10.2"
+    "java.checkstyle.version": "10.2",
+    "xml.fileAssociations": [
+        {
+            "pattern": "**/source/**.ptx",
+            "systemId": "/Users/jasonmac/.vscode/extensions/oscarlevin.pretext-tools-0.21.2/assets/schema/pretext.rng"
+        }
+    ]
 }
