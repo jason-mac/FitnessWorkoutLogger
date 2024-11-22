@@ -1,19 +1,7 @@
 {
-    "java.project.sourcePaths": [
-        "src/test",
-        "src/main",
-        "src/persistence"
-    ],
-    "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar"
-    ],
-    "java.checkstyle.configuration": "${workspaceFolder}/checkstyle.xml",
-    "java.checkstyle.version": "10.2",
-    "xml.fileAssociations": [
-        {
-            "pattern": "**/source/**.ptx",
-            "systemId": "/Users/jasonmac/.vscode/extensions/oscarlevin.pretext-tools-0.21.2/assets/schema/pretext.rng"
-        }
-    ]
+  "java.project.sourcePaths": ["src/test", "src/main", "src/persistence"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": ["lib/**/*.jar"],
+  "java.checkstyle.configuration": "${workspaceFolder}/checkstyle.xml",
+  "java.checkstyle.version": "10.2"
 }
