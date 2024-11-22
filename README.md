@@ -37,11 +37,9 @@ I chose this project because I frequent the gym myself, but I've often found it 
 
 - You can generate the second related action of "Filtering Workouts" by selecting the tabbed pane labelled, "Filter Workouts". In this panel, there will be options to filter your worksouts by the following:
     1)  By Date 
-        * Oldeset to newest, or newest to oldest
         * Only show workouts before this date, or after this date
     2) By Workout Volume 
-        * Highest to lowest, or lowest to highest
-        * Only show workouts with lower volume or higher volume 
+        * Only show workouts with lower volume, or higher volume 
 
 - You can find the visual component by starting the application and there will be a splash screen pop up with a picture of a barbell 
 

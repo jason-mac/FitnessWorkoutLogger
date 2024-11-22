@@ -13,7 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -202,6 +201,7 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
             String dateToRemove = list.getSelectedValue();
             listModel.removeElement(dateToRemove);
             fitnessLoggerAppGui.removeWorkoutAtDate(dateToRemove);
+            fitnessLoggerAppGui.refresh();
         } else if (source == kilograms) {
             updateWorkoutPanel();
         } else if (source == pounds) {

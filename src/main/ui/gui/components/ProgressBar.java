@@ -2,9 +2,11 @@ package ui.gui.components;
 
 import javax.swing.*;
 
+// Class that models the progress bar intended for "loading" sequences
 public class ProgressBar extends JProgressBar {
     private int milliSeconds;
 
+    // EFFECTS: Creaetes a progress bar with milliseconds 
     public ProgressBar(int milliSeconds) {
         this.milliSeconds = milliSeconds;
         setVisible(true);

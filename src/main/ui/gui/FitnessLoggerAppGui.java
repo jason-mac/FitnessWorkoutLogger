@@ -22,8 +22,9 @@ import ui.gui.components.*;
  * 
  * 2) The demo files from "Oracle Java Documentation"  
  * Link: https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
- * 
  */
+
+ // Class that is the Main Frame for the entire gui application
 public class FitnessLoggerAppGui extends JFrame {
     private static final String JSON_STORE_DATA = "./data/dataPersistence.json";
     private static final int WIDTH = 933;
@@ -36,7 +37,7 @@ public class FitnessLoggerAppGui extends JFrame {
     // EFFECTS: Creates an instance of the FitenssLoggerAppGui
     //          and instantiates appropiate fields for GUI and runs the JFrame
     public FitnessLoggerAppGui() {
-       // new SplashScreen();
+        new SplashScreen();
         this.dataPersistence = new DataPersistence(JSON_STORE_DATA);
         this.workoutLogger = new WorkoutLogger();
 
@@ -76,6 +77,8 @@ public class FitnessLoggerAppGui extends JFrame {
         refresh();
     }
 
+    // MODIFES: this
+    // EFFECTS: refreshes the tabs and its panels
     public void refresh() {
         tabbedPanes.refreshTabs();
     }

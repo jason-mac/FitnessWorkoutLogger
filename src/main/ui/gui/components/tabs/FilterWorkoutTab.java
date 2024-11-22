@@ -1,6 +1,5 @@
 package ui.gui.components.tabs;
 
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -22,7 +21,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
-
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     private JTable workoutTable;
     private WorkoutTableModel workoutTableModel;
     private JScrollPane workoutScrollPane;
-    
+
     // EFFECTS: constructor for filterWorkoutTab
     public FilterWorkoutTab(FitnessLoggerAppGui fitnessLoggerAppGui) {
         this.fitnessLoggerAppGui = fitnessLoggerAppGui;
@@ -87,7 +85,7 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: creates a  jpanel with the scroll pane and label
+    // EFFECTS: creates a jpanel with the scroll pane and label
     private void initTablePanel() {
         workoutTablePanel = new JPanel(new BorderLayout());
         JLabel label = new JLabel("All Workout Data with Filter Applied");
@@ -111,7 +109,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates filter radio buttons fot each option and groups them in button groups
+    // EFFECTS: creates filter radio buttons fot each option and groups them in
+    // button groups
     private void initFilterRadioButtons() {
         beforeDate = new JRadioButton("Before Date");
         afterDate = new JRadioButton("After Date");
@@ -139,7 +138,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: Radio buttons are instantiated for user to select pounds or kilograms
+    // EFFECTS: Radio buttons are instantiated for user to select pounds or
+    // kilograms
     private void initUnitRadioButtons() {
         pounds = new JRadioButton("Pounds");
         kilograms = new JRadioButton("Kilograms");
@@ -154,7 +154,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates the main filtering panel for user to interact with at the top
+    // EFFECTS: creates the main filtering panel for user to interact with at the
+    // top
     private JPanel createFilterPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -175,6 +176,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         return panel;
     }
 
+    // EFFECTS: creates a panel to allow user to select between kilograms and pounds
+    //  returns the panel after creating it
     private JPanel createUnitPanelForFilterPanel() {
         JPanel unitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
         JLabel unitLabel = new JLabel("Select Unit: ");
@@ -184,6 +187,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         return unitPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the panel allowing user to filter the workouts based on a given date
     private JPanel createDatePanelForFilterPanel() {
         JPanel datePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         JLabel dateLabel = new JLabel("Filter by Date (yyyy/mm/dd): ");
@@ -195,6 +200,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         return datePanel;
     }
 
+    // EFFECTS: creates a panel to allow user to filter workouts based
+    // on workout volume, returns the panel
     private JPanel createVolumePanelForFilterPanel() {
         JPanel volumPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         JLabel volumeLabel = new JLabel("Filter by Workout Volume (one decimal place): ");
@@ -206,27 +213,31 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         return volumPanel;
     }
 
+    // EFFECTS: handles the user clicing the filter button depending on entered
+    // textfields and buttons chosen
     private void handleFilterButtonAction() {
         if (noDateFilter.isSelected() && noVolumeFilter.isSelected()) {
             workoutTableModel.updateJTable(fitnessLoggerAppGui.getWorkoutLogger().getDates());
         } else if (!isValidDouble(volumeField.getText()) || !isValidDate(dateField.getText())) {
             JOptionPane.showMessageDialog(this, "Please enter valid entries for Volume and Date.");
         } else {
-            System.out.print("filtering");
             filterList();
         }
     }
 
+    // EFFECTS; checks if date has valid format
+    //  returns true if so, false otherwise
     public boolean isValidDate(String date) {
         try {
             DATE_FORMAT.parse(date);
-            System.out.println("parsing date");
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    // MODIFES: this
+    // EFFECTS: refreshes all panels, resets textfields and radiobuttons 
     public void refresh() {
         noVolumeFilter.setSelected(true);
         pounds.setSelected(true);
@@ -235,49 +246,51 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         workoutTableModel.updateJTable(fitnessLoggerAppGui.getWorkoutLogger().getDates());
     }
 
+    // EFFECTS: filters the dates from workoutLogger from given user parameterss
+    // then updates the table displaying the workouts 
     private void filterList() {
         java.util.Set<String> dates = fitnessLoggerAppGui.getWorkoutLogger().getDates();
         if (lowerVolume.isSelected()) {
-            System.out.print("lower");
             dates = filterDatesLower(dates, volumeField.getText());
         }
         if (higherVolume.isSelected()) {
-            System.out.print("higher");
             dates = filterDatesUpper(dates, volumeField.getText());
         }
-        if  (beforeDate.isSelected()) {
-            System.out.print("before");
+        if (beforeDate.isSelected()) {
             dates = filterDatesBefore(dates, dateField.getText());
         }
         if (afterDate.isSelected()) {
-            System.out.print("after");
             dates = filterDatesAfter(dates, dateField.getText());
         }
         workoutTableModel.updateJTable(dates);
     }
 
+    // EFFECTS: filters the dates based upon which comes after the given dateCompare, returns the filtered
+    // list of dates
     private java.util.Set<String> filterDatesAfter(java.util.Set<String> dates, String dateCompare) {
         java.util.Set<String> datesFiltered = new HashSet<>();
         for (String date : dates) {
             if (date.compareTo(dateCompare) >= 0) {
-                System.out.print(date + " >= " + dateCompare);
                 datesFiltered.add(date);
             }
         }
         return datesFiltered;
     }
 
+    // EFFECTS: filters the dates based upon which comes before the given dateCompare, returns the filtered
+    // list of dates
     private java.util.Set<String> filterDatesBefore(java.util.Set<String> dates, String dateCompare) {
         java.util.Set<String> datesFiltered = new HashSet<>();
         for (String date : dates) {
             if (date.compareTo(dateCompare) <= 0) {
-                System.out.print(date + " <= " + dateCompare);
                 datesFiltered.add(date);
             }
         }
         return datesFiltered;
     }
 
+    // EFFECTS: filters the dates based upon which workouts have less volume than value, returns
+    // the filtered list of dates
     private java.util.Set<String> filterDatesLower(java.util.Set<String> dates, String value) {
         double compare = Double.parseDouble(value);
         Unit unit = pounds.isSelected() ? Unit.POUNDS : Unit.KILOGRAMS;
@@ -285,13 +298,15 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         java.util.Set<String> datesFiltered = new HashSet<>();
         for (String date : dates) {
             Workout workout = logger.getWorkout(date);
-            if(workout.getVolume(unit) <= compare) {
+            if (workout.getVolume(unit) <= compare) {
                 datesFiltered.add(date);
             }
         }
         return datesFiltered;
     }
 
+    // EFFECTS: filters the dates based upon which workouts have more volume than value, returns
+    // the filtered list of dates
     private java.util.Set<String> filterDatesUpper(java.util.Set<String> dates, String value) {
         double compare = Double.parseDouble(value);
         Unit unit = pounds.isSelected() ? Unit.POUNDS : Unit.KILOGRAMS;
@@ -299,13 +314,15 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         java.util.Set<String> datesFiltered = new HashSet<>();
         for (String date : dates) {
             Workout workout = logger.getWorkout(date);
-            if(workout.getVolume(unit) >= compare) {
+            if (workout.getVolume(unit) >= compare) {
                 datesFiltered.add(date);
             }
         }
         return datesFiltered;
     }
 
+    // EFFECTS: checks if input as a string can be converted into a valid double
+    // returns true if so, false otherwise
     private boolean isValidDouble(String input) {
         try {
             Double.parseDouble(input);
@@ -316,6 +333,7 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     }
 
     @Override
+    // EFFECTS: handles filterButton click event
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == filterButton) {
@@ -340,9 +358,9 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
         }
 
         // MODIFIES: this
-        // EFFECTS: Clears the current table data and updates it  
-        //          If workout null no changes made 
-        //          If changes are made, table is refreshed 
+        // EFFECTS: Clears the current table data and updates it
+        // If workout null no changes made
+        // If changes are made, table is refreshed
         public void updateJTable(java.util.Set<String> datesSet) {
             WorkoutLogger workoutLogger = fitnessLoggerAppGui.getWorkoutLogger();
             data.clear();
@@ -361,6 +379,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
             fireTableDataChanged();
         }
 
+        // MODIFES: this
+        // EFFECTS: adds the date and workout into the table for display
         public void addDateAndWorkoutToTable(String date, Workout workout) {
             List<String> row = new ArrayList<>();
             row.add(date);
@@ -402,6 +422,8 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
             rowDataForSet.add(Integer.toString(set.getRepCount()));
         }
 
+        // EFFECTS: creates a list holding the workout volume info
+        // returns the list
         public List<String> workoutVolumeRow(Workout workout) {
             List<String> workoutVolumeRow = new ArrayList<>();
             Unit unit = kilograms.isSelected() ? Unit.KILOGRAMS : Unit.POUNDS;
