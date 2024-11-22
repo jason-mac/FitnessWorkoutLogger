@@ -1,11 +1,7 @@
 package ui.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Observer;
 
 import javax.swing.*;
 
@@ -15,13 +11,20 @@ import ui.gui.components.*;
 
 /*
  * SOURCE CREDITS
- * The code in this gui application takes inspiration from many sources:
+ * I would like to give a shoutout to Kobe Bryant, for when I was down he inspired me to keep going.
+ * The code in this gui application and all files in the gui folder takes inspiration from many sources:
  * 
  * 1) Bro Code on YouTube
  * Link: https://www.youtube.com/watch?v=Kmgo00avvEw&t=4660s&pp=ygURYnJvIGNvZGUgamF2YSBndWk%3D
  * 
  * 2) The demo files from "Oracle Java Documentation"  
  * Link: https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
+ * 
+ * 3) Video series from Java Code Junkie, the first video is linked below
+ * Link: https://www.youtube.com/watch?v=1vVJPzVzaK8&list=PL3bGLnkkGnuV699lP_f9DvxyK5lMFpq6U 
+ * 
+ * 4) AlarmSystem application from UBC github repo, the application is linked below
+ * Link: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem 
  */
 
  // Class that is the Main Frame for the entire gui application

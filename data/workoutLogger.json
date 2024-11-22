@@ -1,0 +1,24 @@
+{"workoutLogs": [{
+    "date": "12/12/2001",
+    "workout": {
+        "exercises": [
+            {
+                "sets": [{
+                    "unit": "POUNDS",
+                    "weight": 2,
+                    "repCount": 2
+                }],
+                "name": "bench"
+            },
+            {
+                "sets": [{
+                    "unit": "KILOGRAMS",
+                    "weight": 2,
+                    "repCount": 2
+                }],
+                "name": "lol"
+            }
+        ],
+        "name": ""
+    }
+}]}
