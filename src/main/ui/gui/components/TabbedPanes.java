@@ -5,7 +5,7 @@ import javax.swing.JTabbedPane;
 import ui.gui.FitnessLoggerAppGui;
 import ui.gui.components.tabs.*;
 
-// Class that handles the JTabbedPanes component of the main gui
+// Class that handles the JTabbedPanes component of the main gui frame
 public class TabbedPanes extends JTabbedPane {
     protected FitnessLoggerAppGui fitnessLoggerAppGui;
     protected AddWorkoutTab addWorkoutTab;
@@ -31,14 +31,12 @@ public class TabbedPanes extends JTabbedPane {
     // EFFECTS: adds the tabs to this
     private void initTabs() {
         addTab("Add Workout", null, addWorkoutTab, "Add a workout to your logger");
-        addTab("Display Workout", null, displayWorkoutTab, "Delete a workout");
+        addTab("Display Workout", null, displayWorkoutTab, "Display your workouts");
         addTab("Filter Workout", null, filterWorkoutTab, "View your workouts with filering");
     }
 
     // MODIFIES: this
-    // EFFECTS: When user decides to select a different workout to display, or loads
-    // application
-    // this function will refresh all of the tabs to accomodate the changes
+    // EFFECTS: refreshes all of tabs panels 
     public void refreshTabs() {
         displayWorkoutTab.refresh();
         addWorkoutTab.refresh();

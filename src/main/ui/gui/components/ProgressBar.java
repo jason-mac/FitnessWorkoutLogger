@@ -7,6 +7,7 @@ public class ProgressBar extends JProgressBar {
     private int milliSeconds;
 
     // EFFECTS: Creaetes a progress bar with milliseconds 
+    // sets bar to be visible with string painted true
     public ProgressBar(int milliSeconds) {
         this.milliSeconds = milliSeconds;
         setVisible(true);
@@ -21,7 +22,7 @@ public class ProgressBar extends JProgressBar {
     }
 
     // MODIFIES: this
-    // EFFECTS: runs the progress bar, upon reaching 100% displays the endMessage
+    // EFFECTS: runs the progress bar, upon reaching 100 displays the endMessage
     public void fill(String endMessage) {
         setString(null);
             

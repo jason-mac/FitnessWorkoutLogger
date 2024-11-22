@@ -67,6 +67,20 @@
         }
     },
     {
+        "date": "2004/02/12",
+        "workout": {
+            "exercises": [{
+                "sets": [{
+                    "unit": "KILOGRAMS",
+                    "weight": 500.3,
+                    "repCount": 5
+                }],
+                "name": "Dumbbell Incline Press"
+            }],
+            "name": ""
+        }
+    },
+    {
         "date": "2024/01/01",
         "workout": {
             "exercises": [
