@@ -98,8 +98,7 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes the button pane by creating and setting up the delete button, 
-    //          configuring the layout of the button pane, and adding components including the delete button and right panel
+    // EFFECTS: Initializes the button pane by creating and setting up the delete button
     private void initButtonPane() {
         JPanel rightPanel = createRightPanel();
         buttonPane = new JPanel();
@@ -113,8 +112,7 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
     }
 
     // MODIFIES: this
-    // EFFECTS: Creates and returns a right panel containing radio buttons for selecting between Kilograms and Pounds,
-    //          with Kilograms and Pounds added to a ButtonGroup and appropriate action listeners set up for user interaction
+    // EFFECTS: Creates and returns a right panel containing radio buttons for selecting between Kilograms and Pounds
     private JPanel createRightPanel() {
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
@@ -178,6 +176,17 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
         workoutTableModel.updateJTable(workout);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Given the current selection in the list, removes all current content, 
+    //          revalidates and repaints, and then updates the workout panel based on the selected value
+    private void updateWorkoutPanel() {
+        String selectedValue = list.getSelectedValue();
+        workoutTable.removeAll();
+        workoutTable.revalidate();
+        workoutTable.repaint();
+        updateWorkoutPanel(selectedValue);
+    }
+
 
     @Override
     // EFFECTS: Given the ActionEvent e, does the following:
@@ -207,18 +216,6 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
         updateWorkoutPanel();
     }
 
-    // MODIFIES: this
-    // EFFECTS: Given the current selection in the list, removes all current content, 
-    //          revalidates and repaints, and then updates the workout panel based on the selected value
-    private void updateWorkoutPanel() {
-        String selectedValue = list.getSelectedValue();
-        workoutTable.removeAll();
-        workoutTable.revalidate();
-        workoutTable.repaint();
-        updateWorkoutPanel(selectedValue);
-    }
-
-
     // Class specifically for the JList to display a table
     class WorkoutTableModel extends AbstractTableModel {
         private String[] columnNames = {
@@ -235,12 +232,12 @@ public class DisplayWorkoutTab extends JPanel implements ActionListener, ListSel
         }
 
         // MODIFIES: this
-        // EFFECTS: Clears the current table data and updates it with the exercises from the given workout. 
-        //          If the workout is null, no changes are made. After adding the exercises and their sets to the table, 
-        //          the table is refreshed by activating a data change event.
+        // EFFECTS: Clears the current table data and updates it  
+        //          If workout null no changes made 
+        //          If changes are made, table is refreshed 
         public void updateJTable(Workout workout) {
             data.clear();
-            if(workout == null) {
+            if (workout == null) {
                 return;
             }
 

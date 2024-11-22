@@ -14,8 +14,7 @@ import javax.swing.JWindow;
 public class SplashScreen extends JWindow {
     private ProgressBar bar;
 
-
-    // EFFECTS: Upon instantiation the splash screen is run 
+    // EFFECTS: Upon instantiation the splash screen is run
     public SplashScreen() {
         initSplashScreen();
         runSplashScreen();
@@ -31,8 +30,8 @@ public class SplashScreen extends JWindow {
     }
 
     // MODIFIES: this
-    // EFFECTS: Splash screen is run, and then disposed upon 
-    //          the progress bar finishing
+    // EFFECTS: Splash screen is run, and then disposed upon
+    // the progress bar finishing
     private void runSplashScreen() {
         setVisible(true);
         bar.fill("Opening Application Now");
@@ -44,10 +43,11 @@ public class SplashScreen extends JWindow {
         }
     }
 
-    // EFFECTS: Creates a JPanel which holds the Progress bar and Display image and the message
-    //          returns the created JPanel
+    // EFFECTS: Creates a JPanel which holds the Progress bar and Display image and
+    // the message
+    // returns the created JPanel
     private JPanel initPanel() {
-        ImageIcon image = new ImageIcon(getClass().getResource("/resources/icons/Barbell_Icon.png")); 
+        ImageIcon image = new ImageIcon(getClass().getResource("/resources/icons/Barbell_Icon.png"));
         JPanel panel = new JPanel();
         JLabel labelText = new JLabel("Running FitnessLoggerAppGui...");
         JLabel labelImage = new JLabel();

@@ -55,12 +55,12 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     private Map<JPanel, JLabel> imageLabels;
     private JComboBox<Integer> numSetsDropdown;
     private int numSets;
-    private String exerciseName; 
+    private String exerciseName;
     private Workout workoutToAdd;
     private Exercise exerciseToAdd;
 
-    // EFFECTS: Initializes the AddWorkoutTab with the given FitnessLoggerAppGui, 
-    // sets the DATE_FORMAT to be non-lenient, ensuring strict date parsing, 
+    // EFFECTS: Initializes the AddWorkoutTab with the given FitnessLoggerAppGui,
+    // sets the DATE_FORMAT to be non-lenient, ensuring strict date parsing,
     // and calls the init() method to initialize the components of the tab.
     public AddWorkoutTab(FitnessLoggerAppGui fitnessLoggerAppGui) {
         this.fitnessLoggerAppGui = fitnessLoggerAppGui;
@@ -69,9 +69,11 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: Initializes the components of the AddWorkoutTab, including setting up 
-    // the imageLabels and submitButtons maps, initializing the workoutToAdd object, 
-    // and setting the layout. It also sets up the panels for exercises, date, number 
+    // EFFECTS: Initializes the components of the AddWorkoutTab, including setting
+    // up
+    // the imageLabels and submitButtons maps, initializing the workoutToAdd object,
+    // and setting the layout. It also sets up the panels for exercises, date,
+    // number
     // of exercises, and units, then adds the top panel to the layout.
     private void init() {
         this.imageLabels = new HashMap<>();
@@ -87,10 +89,10 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: Retrieves all all exercise information from user and logs it 
-    //          to the logger and refreshes the panel 
+    // EFFECTS: Retrieves all all exercise information from user and logs it
+    // to the logger and refreshes the panel
     private void getAllExercisesInfo() {
-        for(int i = 1; i <= Integer.parseInt(numExercisesField.getText()); i++) {
+        for (int i = 1; i <= Integer.parseInt(numExercisesField.getText()); i++) {
             getExerciseInfo(i);
         }
         fitnessLoggerAppGui.getWorkoutLogger().addWorkout(dateField.getText(), workoutToAdd);
@@ -107,7 +109,7 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         dialog.setTitle("Adding workout to logger...");
         dialog.add(progressBar);
 
-        SwingWorker<Void, Void> worker = new SwingWorker<Void,Void>() {
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
                 progressBar.fill("Workout Successfully Added!");
@@ -123,7 +125,7 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Resets the panel to original format upon openning application 
+    // EFFECTS: Resets the panel to original format upon openning application
     public void refresh() {
         dateField.setText("");
         numExercisesField.setText("");
@@ -141,16 +143,15 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         setupExerciseInfoDialog(exerciseInfo, 0);
         exerciseInfo.setLocationRelativeTo(fitnessLoggerAppGui);
         exerciseInfo.setSize(500, 250);
-        exerciseInfo.setVisible(true); 
+        exerciseInfo.setVisible(true);
     }
 
-
-    // MODIFES: exerciseInfo 
-    // EFFECTS: Sets up the info dialog for retrieving information on exercises 
+    // MODIFES: exerciseInfo
+    // EFFECTS: Sets up the info dialog for retrieving information on exercises
     private void setupExerciseInfoDialog(JDialog exerciseInfo, int number) {
         numSetsDropdown = new JComboBox<Integer>();
         nameExerciseField = new JTextField(15);
-        for(int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             numSetsDropdown.addItem(i);
         }
         JButton submitButton = new JButton("Submit");
@@ -168,7 +169,7 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: setInfo
-    // EFFECTS: sets up info dialog for retrieving information on sets 
+    // EFFECTS: sets up info dialog for retrieving information on sets
     private void setupSetInfoDialog(JDialog setInfo) {
         JButton submitButton = new JButton("Submit");
         weightField = new JTextField(10);
@@ -186,10 +187,9 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         submitButtons.put(setInfo, submitButton);
     }
 
-
     // EFFECTS: Retrieves information for all sets about one exercise
     private void getAllSetsInfo() {
-        for(int i = 1; i <= numSets; i++) {
+        for (int i = 1; i <= numSets; i++) {
             getSetInfo(i);
         }
     }
@@ -206,8 +206,8 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Creates the top panel for the main panel with user prompts for 
-    //          date, num exercises and kilogram/pounds
+    // EFFECTS: Creates the top panel for the main panel with user prompts for
+    // date, num exercises and kilogram/pounds
     private JPanel createTopPanel() {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         topPanel.add(datePanel);
@@ -241,7 +241,8 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: Creates panel for retrieving information about the number of exercises
+    // EFFECTS: Creates panel for retrieving information about the number of
+    // exercises
     private void initNumExercisesPanel() {
         numExercisesField = new JTextField(3);
         numExercisesField.addActionListener(this);
@@ -257,8 +258,8 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Initializes the unit panel with radio buttons for selecting either 
-    //          kilograms or pounds as the unit of measurement 
+    // EFFECTS: Initializes the unit panel with radio buttons for selecting either
+    // kilograms or pounds as the unit of measurement
     private void initUnitPanel() {
         unitPanel = new JPanel();
         unitPanel.setLayout(new BoxLayout(unitPanel, BoxLayout.X_AXIS));
@@ -283,22 +284,24 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: Creates image icons for check and red x
     private void initImageIcons() {
-        int iconSize = 20; 
-        check = scaleImageIcon(new ImageIcon(getClass().getResource("/resources/icons/Green_Check_Icon.png")), iconSize, iconSize);
-        incorrect = scaleImageIcon(new ImageIcon(getClass().getResource("/resources/icons/Red_X_Icon.png")), iconSize, iconSize);
+        int iconSize = 20;
+        ImageIcon checkUnscaled = new ImageIcon(getClass().getResource("/resources/icons/Green_Check_Icon.png"));
+        ImageIcon incorrectUnscaled = new ImageIcon(getClass().getResource("/resources/icons/Red_X_Icon.png"));
+        check = scaleImageIcon(checkUnscaled, iconSize, iconSize);
+        incorrect = scaleImageIcon(incorrectUnscaled, iconSize, iconSize);
     }
-    
+
     // EFFECTS: given icon, and dimension, scales down the image and the returns it
     private ImageIcon scaleImageIcon(ImageIcon icon, int width, int height) {
-        Image img = icon.getImage(); 
+        Image img = icon.getImage();
         Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(scaledImg); 
+        return new ImageIcon(scaledImg);
     }
 
     // EFFECTS: given date checks if its valid (yyyy/mm/dd)
-    //          returns true if valid, false otherwise
+    // returns true if valid, false otherwise
     private boolean isValidDate(String date) {
-        if(date == null) {
+        if (date == null) {
             return false;
         }
         try {
@@ -311,7 +314,7 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
 
     // EFFECTS: returns true of the num string is valid number
     private boolean isValidNum(String num) {
-        if(num == null || num.length() == 0 || !isPositiveInteger(num))  {
+        if (num == null || num.length() == 0 || !isPositiveInteger(num)) {
             return false;
         }
         return true;
@@ -319,45 +322,46 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
 
     // EFFECTS: checks if string has the form of a positive integer
     private boolean isPositiveInteger(String str) {
-        for(char c : str.toCharArray()) {
-            if(!Character.isDigit(c)) {
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
                 return false;
             }
         }
         return true;
     }
-    
 
     @Override
     // EFFECTS: Given the ActionEvent e, does the following:
-    //  if source comes from dateField:
-    //      handles the input for the date field
-    //  if source comes from numExercisesField:
-    //      handles the input for the number of exercises field
-    //  if source comes from confirmButton:
-    //      processes the confirmation button action
-    //  if source comes from submit button in exerciseInfo dialog:
-    //      handles the submission of exercise information
-    //  if source comes from submit button in setInfo dialog:
-    //      handles the submission of set information
+    // if source comes from dateField:
+    // handles the input for the date field
+    // if source comes from numExercisesField:
+    // handles the input for the number of exercises field
+    // if source comes from confirmButton:
+    // processes the confirmation button action
+    // if source comes from submit button in exerciseInfo dialog:
+    // handles the submission of exercise information
+    // if source comes from submit button in setInfo dialog:
+    // handles the submission of set information
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if(source == dateField) {
+        if (source == dateField) {
             handleDateField();
         } else if (source == numExercisesField) {
             handleNumExercisesField();
-        } else if(source == confirmButton) {
+        } else if (source == confirmButton) {
             handleConfirmButton();
-        } else if(source == submitButtons.get(exerciseInfo)) {
+        } else if (source == submitButtons.get(exerciseInfo)) {
             handleSubmitButtonExerciseInfo();
-        } else if(source == submitButtons.get(setInfo)) {
+        } else if (source == submitButtons.get(setInfo)) {
             handleSubmitButtonSetInfo();
         }
     }
 
-    //  MODIFIES: this
-    //  EFFECTS: Given the action from the submit button in the setInfo dialog, does the following:
-    //  Creates a new Set object with the parsed values adds it to exercis and closes the setInfo dialog.
+    // MODIFIES: this
+    // EFFECTS: Given the action from the submit button in the setInfo dialog, does
+    // the following:
+    // Creates a new Set object with the parsed values adds it to exercis and closes
+    // the setInfo dialog.
     private void handleSubmitButtonSetInfo() {
         double weight = Double.parseDouble(weightField.getText());
         int repCount = Integer.parseInt(repCountField.getText());
@@ -369,37 +373,38 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: given the date field from textField, if it is valid
-    //          pop up check icon, pop up incorrect icon otherwise
+    // pop up check icon, pop up incorrect icon otherwise
     private void handleDateField() {
-            String date = dateField.getText();
-            Boolean isValid = isValidDate(date);
-            if(isValid) {
-                imageLabels.get(datePanel).setIcon(check);  
-            } else {
-                imageLabels.get(datePanel).setIcon(incorrect);
-            }
+        String date = dateField.getText();
+        Boolean isValid = isValidDate(date);
+        if (isValid) {
+            imageLabels.get(datePanel).setIcon(check);
+        } else {
+            imageLabels.get(datePanel).setIcon(incorrect);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: given the numExercises field from textField, if it is valid
-    //          pop up check icon, pop up incorrect icon otherwise
+    // pop up check icon, pop up incorrect icon otherwise
     private void handleNumExercisesField() {
-            String num = numExercisesField.getText();
-            Boolean isValid = isValidNum(num);
-            if(isValid) {
-                imageLabels.get(numExercisesPanel).setIcon(check);
-            } else {
-                imageLabels.get(numExercisesPanel).setIcon(incorrect);
-            }
+        String num = numExercisesField.getText();
+        Boolean isValid = isValidNum(num);
+        if (isValid) {
+            imageLabels.get(numExercisesPanel).setIcon(check);
+        } else {
+            imageLabels.get(numExercisesPanel).setIcon(incorrect);
+        }
     }
 
     // MODIFES: this
-    // EFFECTS: validates the date and number of exercises, creates a new Workout if valid, 
+    // EFFECTS: validates the date and number of exercises, creates a new Workout if
+    // valid,
     // and updates the confirm button's color accordingly.
     private void handleConfirmButton() {
         String date = dateField.getText();
         String num = numExercisesField.getText();
-        if(isValidNum(num) && isValidDate(date)) {
+        if (isValidNum(num) && isValidDate(date)) {
             workoutToAdd = new Workout("");
             confirmButton.setForeground(Color.GREEN);
             getAllExercisesInfo();
@@ -408,7 +413,8 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         }
     }
 
-    // EFFECTS: Retrieves the exercise name, creates a new Exercise, adds it to the workout, 
+    // EFFECTS: Retrieves the exercise name, creates a new Exercise, adds it to the
+    // workout,
     // retrieves the number of sets, and then opens dialogs for the sets.
     private void handleSubmitButtonExerciseInfo() {
         exerciseName = nameExerciseField.getText();
