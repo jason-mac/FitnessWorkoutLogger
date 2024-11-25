@@ -1,22 +1,32 @@
 {"workoutLogs": [
     {
-        "date": "2017/05/22",
+        "date": "2001/11/02",
         "workout": {
-            "exercises": [{
-                "sets": [
-                    {
+            "exercises": [
+                {
+                    "sets": [{
                         "unit": "POUNDS",
-                        "weight": 345.5,
+                        "weight": 23.5,
                         "repCount": 5
-                    },
-                    {
-                        "unit": "POUNDS",
-                        "weight": 34.5,
-                        "repCount": 10
-                    }
-                ],
-                "name": "Shoulder Press"
-            }],
+                    }],
+                    "name": "Jumping Jacks"
+                },
+                {
+                    "sets": [
+                        {
+                            "unit": "POUNDS",
+                            "weight": 34.5,
+                            "repCount": 23
+                        },
+                        {
+                            "unit": "POUNDS",
+                            "weight": 43.5,
+                            "repCount": 5
+                        }
+                    ],
+                    "name": "Fuck"
+                }
+            ],
             "name": ""
         }
     },
