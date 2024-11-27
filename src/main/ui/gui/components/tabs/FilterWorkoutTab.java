@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -249,76 +248,23 @@ public class FilterWorkoutTab extends JPanel implements ActionListener {
     // EFFECTS: filters the dates from workoutLogger from given user parameterss
     // then updates the table displaying the workouts 
     private void filterList() {
-        java.util.Set<String> dates = fitnessLoggerAppGui.getWorkoutLogger().getDates();
+        WorkoutLogger workoutLogger = fitnessLoggerAppGui.getWorkoutLogger();
+        java.util.Set<String> dates = workoutLogger.getDates();
+        double compare = Double.parseDouble(volumeField.getText());
+        Unit unit = kilograms.isSelected() ? Unit.KILOGRAMS : Unit.POUNDS;
         if (lowerVolume.isSelected()) {
-            dates = filterDatesLower(dates, volumeField.getText());
+            dates = workoutLogger.filterDatesLowerVolume(dates, compare, unit);
         }
         if (higherVolume.isSelected()) {
-            dates = filterDatesUpper(dates, volumeField.getText());
+            dates = workoutLogger.filterDatesHigherVolume(dates, compare, unit);
         }
         if (beforeDate.isSelected()) {
-            dates = filterDatesBefore(dates, dateField.getText());
+            dates = workoutLogger.filterDatesBeforeDate(dates, dateField.getText());
         }
         if (afterDate.isSelected()) {
-            dates = filterDatesAfter(dates, dateField.getText());
+            dates = workoutLogger.filterDatesAfterDate(dates, dateField.getText());
         }
         workoutTableModel.updateJTable(dates);
-    }
-
-    // EFFECTS: filters the dates based upon which comes after the given dateCompare, returns the filtered
-    // list of dates
-    private java.util.Set<String> filterDatesAfter(java.util.Set<String> dates, String dateCompare) {
-        java.util.Set<String> datesFiltered = new HashSet<>();
-        for (String date : dates) {
-            if (date.compareTo(dateCompare) >= 0) {
-                datesFiltered.add(date);
-            }
-        }
-        return datesFiltered;
-    }
-
-    // EFFECTS: filters the dates based upon which comes before the given dateCompare, returns the filtered
-    // list of dates
-    private java.util.Set<String> filterDatesBefore(java.util.Set<String> dates, String dateCompare) {
-        java.util.Set<String> datesFiltered = new HashSet<>();
-        for (String date : dates) {
-            if (date.compareTo(dateCompare) <= 0) {
-                datesFiltered.add(date);
-            }
-        }
-        return datesFiltered;
-    }
-
-    // EFFECTS: filters the dates based upon which workouts have less volume than value, returns
-    // the filtered list of dates
-    private java.util.Set<String> filterDatesLower(java.util.Set<String> dates, String value) {
-        double compare = Double.parseDouble(value);
-        Unit unit = pounds.isSelected() ? Unit.POUNDS : Unit.KILOGRAMS;
-        WorkoutLogger logger = fitnessLoggerAppGui.getWorkoutLogger();
-        java.util.Set<String> datesFiltered = new HashSet<>();
-        for (String date : dates) {
-            Workout workout = logger.getWorkout(date);
-            if (workout.getVolume(unit) <= compare) {
-                datesFiltered.add(date);
-            }
-        }
-        return datesFiltered;
-    }
-
-    // EFFECTS: filters the dates based upon which workouts have more volume than value, returns
-    // the filtered list of dates
-    private java.util.Set<String> filterDatesUpper(java.util.Set<String> dates, String value) {
-        double compare = Double.parseDouble(value);
-        Unit unit = pounds.isSelected() ? Unit.POUNDS : Unit.KILOGRAMS;
-        WorkoutLogger logger = fitnessLoggerAppGui.getWorkoutLogger();
-        java.util.Set<String> datesFiltered = new HashSet<>();
-        for (String date : dates) {
-            Workout workout = logger.getWorkout(date);
-            if (workout.getVolume(unit) >= compare) {
-                datesFiltered.add(date);
-            }
-        }
-        return datesFiltered;
     }
 
     // EFFECTS: checks if input as a string can be converted into a valid double

@@ -1,13 +1,18 @@
 package ui.gui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
 
+import model.EventLog;
 import model.WorkoutLogger;
 import persistence.DataPersistence;
 import ui.gui.components.*;
+import ui.printer.ConsolePrinter;
+import ui.printer.LogPrinter;
 
 /*
  * SOURCE CREDITS
@@ -48,6 +53,7 @@ public class FitnessLoggerAppGui extends JFrame {
         initTabbedPanes();
 
         add(tabbedPanes);
+        addWindowListner();
         setVisible(true);
     }
 
@@ -95,5 +101,19 @@ public class FitnessLoggerAppGui extends JFrame {
 
     public WorkoutLogger getWorkoutLogger() {
         return this.workoutLogger;
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: adds a window listeners for closing the application
+    private void addWindowListner() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                LogPrinter logPrinter = new ConsolePrinter();
+                logPrinter.printLog(EventLog.getInstance());
+                dispose();
+            }
+        });
     }
 }

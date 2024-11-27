@@ -55,3 +55,25 @@ I chose this project because I frequent the gym myself, but I've often found it 
 - You can save the state of the application to file by clicking "File" in the menu bar and then selecting "Save" in the drop down menu 
 
 - You can reload the state of the application from file by clicking "File" in the menu bar and then selecting "Load" in the drop down menu 
+
+## Phase 4: Task 2
+- Workout added to workout logger at date: 2024/12/02
+- Workout added to workout logger at date: 2001/11/02
+- Workout added to workout logger at date: 2006/12/01
+- Workout added to workout logger at date: 2004/02/12
+- Workout added to workout logger at date: 2024/01/01
+- Workout added to workout logger at date: 2001/12/12
+- Workout removed from workout logger at date: 2024/01/01
+- Workout removed from workout logger at date: 2001/11/02
+- Collection of Dates/Workouts filtered by volume (POUNDS) greater than: 55.5 returned
+- Collection of Dates/Workouts filtered by volume (POUNDS) less than: 55.5 returned
+- Collection of Dates/Workouts filtered by dates after: 2004/12/12 returned
+- Collection of Dates/Workouts filtered by dates before: 2004/12/12 returned
+- Collection of Dates/Workouts filtered by volume (KILOGRAMS) greater than: 55.5 returned
+- Collection of Dates/Workouts filtered by dates after: 2004/12/12 returned
+- Collection of Dates/Workouts filtered by volume (KILOGRAMS) less than: 55.5 returned
+- Collection of Dates/Workouts filtered by dates after: 2004/12/12 returned
+- Collection of Dates/Workouts filtered by volume (POUNDS) greater than: 55.5 returned
+- Collection of Dates/Workouts filtered by dates before: 2004/12/12 returned
+- Collection of Dates/Workouts filtered by volume (KILOGRAMS) less than: 55.5 returned
+- Collection of Dates/Workouts filtered by dates before: 2004/12/12 returned

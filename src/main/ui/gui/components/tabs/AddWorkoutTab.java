@@ -424,5 +424,4 @@ public class AddWorkoutTab extends JPanel implements ActionListener {
         exerciseInfo.dispose();
         getAllSetsInfo();
     }
-
 }

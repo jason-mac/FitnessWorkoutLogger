@@ -2,9 +2,14 @@ package model;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
+
+import model.Set.Unit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+
 
 import persistence.Writeable;
 
@@ -22,6 +27,7 @@ public class WorkoutLogger implements Writeable {
     // EFFECTS: adds a workout at given date into the collection
     //          over rides the workout if there is already one at the given date
     public void addWorkout(String date, Workout workout) {
+        EventLog.getInstance().logEvent(new Event("Workout added to workout logger at date: " + date));
         this.workoutLogs.put(date, workout);
     }
 
@@ -29,6 +35,7 @@ public class WorkoutLogger implements Writeable {
     // EFFECTS: removes a workout at the given date
     //          if no workout at date, does nothing
     public void removeWorkout(String date) {
+        EventLog.getInstance().logEvent(new Event("Workout removed from workout logger at date: " + date));
         this.workoutLogs.remove(date);
     }
 
@@ -56,6 +63,70 @@ public class WorkoutLogger implements Writeable {
 
     public HashMap<String, Workout> getWorkoutLogs() {
         return workoutLogs;
+    }
+
+    // REQUIRES: Each date in dates is logged as workout
+    // EFFECTS: filters the dates based upon which comes after the given dateCompare, returns the filtered
+    // list of dates
+    public java.util.Set<String> filterDatesAfterDate(java.util.Set<String> dates, String dateCompare) {
+        java.util.Set<String> datesFiltered = new HashSet<>();
+        for (String date : dates) {
+            if (date.compareTo(dateCompare) >= 0) {
+                datesFiltered.add(date);
+            }
+        }
+        String message = "Collection of Dates/Workouts filtered by dates after: " + dateCompare + " returned";
+        EventLog.getInstance().logEvent(new Event(message));
+        return datesFiltered;
+    }
+
+    // REQUIRES: Each date in dates is logged as workout
+    // EFFECTS: filters the dates based upon which comes before the given dateCompare, returns the filtered
+    // list of dates
+    public java.util.Set<String> filterDatesBeforeDate(java.util.Set<String> dates, String dateCompare) {
+        java.util.Set<String> datesFiltered = new HashSet<>();
+        for (String date : dates) {
+            if (date.compareTo(dateCompare) <= 0) {
+                datesFiltered.add(date);
+            }
+        }
+        String message = "Collection of Dates/Workouts filtered by dates before: " + dateCompare + " returned";
+        EventLog.getInstance().logEvent(new Event(message));
+        return datesFiltered;
+    }
+
+    // REQUIRES: Each date in dates is logged as workout
+    // EFFECTS: filters the dates based upon which workouts have less volume than value, returns
+    // the filtered list of dates
+    public java.util.Set<String> filterDatesLowerVolume(java.util.Set<String> dates, double compare, Unit unit) {
+        java.util.Set<String> datesFiltered = new HashSet<>();
+        for (String date : dates) {
+            Workout workout = this.getWorkout(date);
+            if (workout.getVolume(unit) <= compare) {
+                datesFiltered.add(date);
+            }
+        }
+        String message = "Collection of Dates/Workouts filtered by volume (";
+        message += (unit.toString() + ") less than: " + compare + " returned");
+        EventLog.getInstance().logEvent(new Event(message));
+        return datesFiltered;
+    }
+
+    // REQUIRES: Each date in dates is logged as workout
+    // EFFECTS: filters the dates based upon which workouts have more volume than value, returns
+    // the filtered list of dates
+    public java.util.Set<String> filterDatesHigherVolume(java.util.Set<String> dates, double compare, Unit unit) {
+        java.util.Set<String> datesFiltered = new HashSet<>();
+        for (String date : dates) {
+            Workout workout = this.getWorkout(date);
+            if (workout.getVolume(unit) >= compare) {
+                datesFiltered.add(date);
+            }
+        }
+        String message = "Collection of Dates/Workouts filtered by volume (";
+        message += (unit.toString() + ") greater than: " + compare + " returned");
+        EventLog.getInstance().logEvent(new Event(message));
+        return datesFiltered;
     }
 
     @Override

@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingWorker;
 
+import model.EventLog;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 
 
 import ui.gui.FitnessLoggerAppGui;
+import ui.printer.*;
 
 // Class that is component for the main JFrame of application 
 // This class is a menubar relating to File operations
@@ -169,7 +171,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     // EFFECTS: closes application upon hitting the exitItem
     private void handleExitItemAction() {
-        System.exit(0);
+        LogPrinter logPrinter = new ConsolePrinter();
+        logPrinter.printLog(EventLog.getInstance());
+        fitnessLoggerAppGui.dispose();
     }
 
     // EFFECTS: handles the case for the file not being able to be saved to or loaded from
