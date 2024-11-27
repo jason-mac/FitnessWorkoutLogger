@@ -86,11 +86,12 @@ I chose this project because I frequent the gym myself, but I've often found it 
 2) Refactoring the Associations to `FitnessLoggerAppGui`  
 
      I would refactor the associations of `AddWorkoutTab`, `DisplayWorkoutTab`, and `FilterWorkoutTab` to `FitnessLoggerAppGui` by removing `FitnessLoggerAppGui` as a data member in the Tab classes. Instead, I would establish bidirectional associations between each of the Tab classes and `TabbedPanes`. This would result in a simpler and more intuitive structure, as the Tab classes would interact with `FitnessLoggerAppGui` through the `TabbedPanes` class. This would also reduce unnecessary associations, promoting cleaner interactions and creating an overall more simple structure in the UML, as opposed to its current "circular" structure.
+
 3) Refactor Filtering Functions  
 
     In the `WorkoutLogger` class, I currently have multiple filtering functions (e.g., `filterDatesAfterDate(Set<String> dates, String dateCompare)`, `filterDatesLowerVolume(Set<String> dates, int volume, Unit unit)`), which handles filtering based on different comparison variables. I would refactor this by creating a `FilterWorkoutLogger` interface with the method to be overwritten by subclasses:  
 
-    `Set<String> filterDates(Set<String> dates, Object[] comparisonObjects);` . 
+    `Set<String> filterDates(Set<String> dates, Object[] comparisonObjects);`  
 
     Subclasses would implement this interface, each providing its own filtering logic through overriding the `filterDates` method.  
      The `WorkoutLogger` class would then only need a single filtering method:  
