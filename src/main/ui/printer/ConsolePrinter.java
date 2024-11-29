@@ -10,6 +10,7 @@ public class ConsolePrinter implements LogPrinter {
     @Override
     // EFFECTS: prints out event description for each event in el
     public void printLog(EventLog el) {
+        System.out.println("Event Logs");
         for (Event event : el) {
             System.out.println(event.toString() + "\n");
         }
