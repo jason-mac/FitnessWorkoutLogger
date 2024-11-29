@@ -11,7 +11,7 @@ public class ConsolePrinter implements LogPrinter {
     // EFFECTS: prints out event description for each event in el
     public void printLog(EventLog el) {
         for (Event event : el) {
-            System.out.println(event.getDescription());
+            System.out.println(event.toString() + "\n");
         }
     }
 }
