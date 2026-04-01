@@ -2,3 +2,4 @@ bin/
 obj/
 *.class
 .vscode/
+.DS_Store
